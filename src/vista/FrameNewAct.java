@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.JComboBox;
 
 public class FrameNewAct extends JFrame {
 
@@ -31,6 +32,7 @@ public class FrameNewAct extends JFrame {
 	private JTextField txtNombre;
 	private JLabel lblMessage = new JLabel("");
 	private JTextField txtActividad;
+	private JTextField txtCorreoEncargado;
 
 	/**
 	 * Launch the application.
@@ -72,7 +74,7 @@ public class FrameNewAct extends JFrame {
 		JLabel lblTitle = new JLabel("Project manager");
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(227, 11, 134, 20);
+		lblTitle.setBounds(174, 10, 134, 20);
 		pnlArriba.add(lblTitle);
 		
 		JLabel lblExit = new JLabel("X");
@@ -212,7 +214,7 @@ public class FrameNewAct extends JFrame {
 		txtIdActv.setHorizontalAlignment(SwingConstants.LEFT);
 		txtIdActv.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		txtIdActv.setColumns(10);
-		txtIdActv.setBounds(155, 211, 280, 37);
+		txtIdActv.setBounds(24, 150, 337, 37);
 		contentPane.add(txtIdActv);
 		
 		txtNombre = new JTextField();
@@ -242,13 +244,13 @@ public class FrameNewAct extends JFrame {
 		txtNombre.setColumns(10);
 		txtNombre.setBorder(new LineBorder(new Color(135, 206, 250), 2));
 		txtNombre.setBackground(new Color(240, 255, 255));
-		txtNombre.setBounds(155, 259, 280, 37);
+		txtNombre.setBounds(24, 198, 337, 37);
 		contentPane.add(txtNombre);
 		
 		lblMessage.setForeground(new Color(139, 0, 0));
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessage.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		lblMessage.setBounds(155, 115, 279, 37);
+		lblMessage.setBounds(24, 102, 337, 37);
 		contentPane.add(lblMessage);
 		
 		txtActividad = new JTextField();
@@ -279,15 +281,51 @@ public class FrameNewAct extends JFrame {
 		txtActividad.setColumns(10);
 		txtActividad.setBorder(new LineBorder(new Color(135, 206, 250), 2));
 		txtActividad.setBackground(new Color(240, 255, 255));
-		txtActividad.setBounds(155, 163, 280, 37);
+		txtActividad.setBounds(24, 102, 337, 37);
 		contentPane.add(txtActividad);
 		
 		JLabel lblTitulo = new JLabel("Agregar una actividad");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 		lblTitulo.setForeground(new Color(51, 102, 204));
-		lblTitulo.setBounds(155, 68, 280, 40);
+		lblTitulo.setBounds(103, 51, 280, 40);
 		contentPane.add(lblTitulo);
+		
+		txtCorreoEncargado = new JTextField();
+		txtCorreoEncargado.setText("Correo Encargado");
+		txtCorreoEncargado.setHorizontalAlignment(SwingConstants.LEFT);
+		txtCorreoEncargado.setForeground(new Color(100, 149, 237));
+		txtCorreoEncargado.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+		txtCorreoEncargado.setColumns(10);
+		txtCorreoEncargado.setBorder(new LineBorder(new Color(135, 206, 250), 2));
+		txtCorreoEncargado.setBackground(new Color(240, 255, 255));
+		txtCorreoEncargado.setBounds(24, 246, 337, 37);
+		contentPane.add(txtCorreoEncargado);
+		txtCorreoEncargado.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtCorreoEncargado.getText().equals("Correo Encargado")) {
+					txtCorreoEncargado.setText("");
+				}
+				else {
+					txtCorreoEncargado.selectAll();
+					// TODO
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtCorreoEncargado.getText().equals("")) {
+					txtCorreoEncargado.setText("Correo Encargado");
+				}
+				
+			}
+		});
+		
+		JComboBox cmbBoxTipos = new JComboBox();
+		cmbBoxTipos.setBackground(new Color(240,255,255));
+		cmbBoxTipos.setBounds(24, 294, 337, 37);
+		contentPane.add(cmbBoxTipos);
 		
 		
 		setLocationRelativeTo(null);
