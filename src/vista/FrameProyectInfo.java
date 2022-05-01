@@ -8,17 +8,20 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.JList;
 import java.awt.ScrollPane;
+import java.awt.Window;
 
 public class FrameProyectInfo extends JFrame {
 
@@ -111,6 +114,11 @@ public class FrameProyectInfo extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			BtnEditar.setBackground(new Color(135, 149, 250));
+	    	JComponent comp = (JComponent) e.getSource();
+	        Window win = SwingUtilities.getWindowAncestor(comp);
+	        win.dispose();
+	        FrameListadoActividades irAReporte = new FrameListadoActividades();
+	        irAReporte.setVisible(true);
 			}
 
 		
@@ -132,8 +140,14 @@ public class FrameProyectInfo extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			btnReporte.setBackground(new Color(135, 149, 250));
-		}
+	    	JComponent comp = (JComponent) e.getSource();
+	        Window win = SwingUtilities.getWindowAncestor(comp);
+	        win.dispose();
+	        FrameListadoProyectos irAReporte = new FrameListadoProyectos();//FrameReporteUser
+	        irAReporte.setVisible(true);
+			}
 		});
+
 		btnReporte.setLayout(null);
 		btnReporte.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnReporte.setBackground(new Color(135, 206, 250));
@@ -158,8 +172,12 @@ public class FrameProyectInfo extends JFrame {
 		lblRegresar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			btnRegresar.setBackground(new Color(135, 149, 250));
-			
+			btnReporte.setBackground(new Color(135, 149, 250));
+	    	JComponent comp = (JComponent) e.getSource();
+	        Window win = SwingUtilities.getWindowAncestor(comp);
+	        win.dispose();
+	        FrameListadoProyectos irAReporte = new FrameListadoProyectos();
+	        irAReporte.setVisible(true);
 		}
 		});
 		lblRegresar.setForeground(new Color(30, 144, 255));
