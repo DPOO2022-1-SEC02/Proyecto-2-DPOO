@@ -108,26 +108,10 @@ public class FrameListadoProyectos extends JFrame {
 		lblLoginMessage.setBounds(263, 91, 279, 37);
 		contentPane.add(lblLoginMessage);
 		
-
-		JButton newProject = new JButton("+ Nuevo Proyecto");
-		newProject.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		newProject.setBackground(new Color(102, 204, 255));
-		newProject.setForeground(new Color(0, 0, 153));
-		newProject.setFont(new Font("Roboto Black", Font.BOLD, 12));
-		newProject.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		newProject.setBounds(368, 50, 176, 37);
-		contentPane.add(newProject);
-		
 		JLabel lblNewLabel = new JLabel("Proyectos Disponibles");
-		lblNewLabel.setFont(new Font("Roboto Black", Font.BOLD, 20));
-		lblNewLabel.setBounds(57, 63, 247, 22);
+		lblNewLabel.setForeground(new Color(51, 102, 204));
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		lblNewLabel.setBounds(57, 51, 247, 42);
 		contentPane.add(lblNewLabel);
 		
 		
@@ -151,19 +135,82 @@ public class FrameListadoProyectos extends JFrame {
 		scrollPane.setViewportView(listadoProyectos);
 		contentPane.add(scrollPane);
 		
-		JButton saveInfo = new JButton("Guardar información");
-		saveInfo.addMouseListener(new MouseAdapter() {
+		JPanel pnlBtnNewProyecto = new JPanel();
+		pnlBtnNewProyecto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//TODO
 			}
-		});
-		saveInfo.setFont(new Font("Roboto Medium", Font.PLAIN, 14));
-		saveInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlBtnNewProyecto.setBackground(new Color(153, 204, 255));
 			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlBtnNewProyecto.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlBtnNewProyecto.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlBtnNewProyecto.setBackground(new Color(135, 206, 250));
+			}
+		
 		});
-		saveInfo.setBounds(366, 347, 176, 43);
-		contentPane.add(saveInfo);
+		pnlBtnNewProyecto.setLayout(null);
+		pnlBtnNewProyecto.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		pnlBtnNewProyecto.setBackground(new Color(135, 206, 250));
+		pnlBtnNewProyecto.setBounds(400, 51, 141, 44);
+		contentPane.add(pnlBtnNewProyecto);
+		
+		JLabel lblNuevoProyecto = new JLabel("+ Nuevo proyecto");
+		lblNuevoProyecto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNuevoProyecto.setForeground(new Color(30, 144, 255));
+		lblNuevoProyecto.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNuevoProyecto.setBackground(Color.WHITE);
+		lblNuevoProyecto.setBounds(0, 0, 141, 44);
+		pnlBtnNewProyecto.add(lblNuevoProyecto);
+		
+		JPanel pnlBtnSaveInfo = new JPanel();
+		pnlBtnSaveInfo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlBtnSaveInfo.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlBtnSaveInfo.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlBtnSaveInfo.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlBtnSaveInfo.setBackground(new Color(135, 206, 250));
+			}
+		
+		});
+		pnlBtnSaveInfo.setLayout(null);
+		pnlBtnSaveInfo.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		pnlBtnSaveInfo.setBackground(new Color(135, 206, 250));
+		pnlBtnSaveInfo.setBounds(385, 348, 157, 44);
+		contentPane.add(pnlBtnSaveInfo);
+		
+		JLabel lblGuardarInformacin = new JLabel("Guardar Informaci\u00F3n");
+		lblGuardarInformacin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGuardarInformacin.setForeground(new Color(30, 144, 255));
+		lblGuardarInformacin.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblGuardarInformacin.setBackground(Color.WHITE);
+		lblGuardarInformacin.setBounds(0, 0, 157, 44);
+		pnlBtnSaveInfo.add(lblGuardarInformacin);
 		
 		
 

@@ -36,7 +36,6 @@ public class FrameListadoActividades extends JFrame {
 
 
 	private JPanel contentPane;
-	private JLabel lblLoginMessage = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -84,30 +83,116 @@ public class FrameListadoActividades extends JFrame {
 		contentPane.add(pnlAzul);
 		pnlAzul.setLayout(null);
 		
-		JButton createReportBtn = new JButton("<html>Reporte<br> de Actividades</html>");
-		createReportBtn.setForeground(new Color(0, 0, 153));
-		createReportBtn.setFont(new Font("Roboto Black", Font.BOLD, 12));
-		createReportBtn.setBackground(new Color(102, 204, 255));
-		createReportBtn.setBounds(20, 206, 141, 37);
-		pnlAzul.add(createReportBtn);
-		
-		JButton backBtn = new JButton("Regresar");
-		backBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JPanel pnlBtnNewUser = new JPanel();
+		pnlBtnNewUser.setLayout(null);
+		pnlBtnNewUser.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		pnlBtnNewUser.setBackground(new Color(135, 206, 250));
+		pnlBtnNewUser.setBounds(10, 114, 166, 40);
+		pnlAzul.add(pnlBtnNewUser);
+		pnlBtnNewUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO:
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlBtnNewUser.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlBtnNewUser.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlBtnNewUser.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlBtnNewUser.setBackground(new Color(135, 206, 250));
 			}
 		});
-		backBtn.setForeground(new Color(0, 0, 153));
-		backBtn.setFont(new Font("Roboto Black", Font.BOLD, 12));
-		backBtn.setBackground(new Color(102, 204, 255));
-		backBtn.setBounds(20, 268, 107, 37);
-		pnlAzul.add(backBtn);
 		
-		JButton addParticipant = new JButton("Agregar participante");
-		addParticipant.setForeground(new Color(0, 0, 153));
-		addParticipant.setFont(new Font("Roboto Black", Font.BOLD, 12));
-		addParticipant.setBackground(new Color(102, 204, 255));
-		addParticipant.setBounds(10, 139, 151, 37);
-		pnlAzul.add(addParticipant);
+		JLabel lblNewUser = new JLabel("Agregar participante");
+		lblNewUser.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewUser.setForeground(new Color(30, 144, 255));
+		lblNewUser.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewUser.setBackground(Color.WHITE);
+		lblNewUser.setBounds(0, 0, 166, 40);
+		pnlBtnNewUser.add(lblNewUser);
+		
+		JPanel pnlBtnReporteAct = new JPanel();
+		pnlBtnReporteAct.setLayout(null);
+		pnlBtnReporteAct.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		pnlBtnReporteAct.setBackground(new Color(135, 206, 250));
+		pnlBtnReporteAct.setBounds(10, 216, 166, 40);
+		pnlAzul.add(pnlBtnReporteAct);
+		pnlBtnReporteAct.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO:
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlBtnReporteAct.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlBtnReporteAct.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlBtnReporteAct.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlBtnReporteAct.setBackground(new Color(135, 206, 250));
+			}
+		});
+		
+		JLabel lblReporteAct = new JLabel("Reporte de actividades");
+		lblReporteAct.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReporteAct.setForeground(new Color(30, 144, 255));
+		lblReporteAct.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblReporteAct.setBackground(Color.WHITE);
+		lblReporteAct.setBounds(0, 0, 166, 40);
+		pnlBtnReporteAct.add(lblReporteAct);
+		
+		JPanel pnlBtnRegresar = new JPanel();
+		pnlBtnRegresar.setLayout(null);
+		pnlBtnRegresar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		pnlBtnRegresar.setBackground(new Color(135, 206, 250));
+		pnlBtnRegresar.setBounds(10, 328, 166, 40);
+		pnlBtnRegresar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO:
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
+			}
+		});
+		pnlAzul.add(pnlBtnRegresar);
+		
+		JLabel lblRegresar = new JLabel("Regresar");
+		lblRegresar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegresar.setForeground(new Color(30, 144, 255));
+		lblRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblRegresar.setBackground(Color.WHITE);
+		lblRegresar.setBounds(0, 0, 166, 40);
+		pnlBtnRegresar.add(lblRegresar);
 		
 		JLabel lblTitle = new JLabel("Project manager");
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
@@ -137,24 +222,6 @@ public class FrameListadoActividades extends JFrame {
 		lblExit.setBounds(558, 11, 32, 19);
 		pnlArriva.add(lblExit);
 		
-		lblLoginMessage.setForeground(new Color(139, 0, 0));
-		lblLoginMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLoginMessage.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		lblLoginMessage.setBounds(263, 91, 279, 37);
-		contentPane.add(lblLoginMessage);
-		
-
-		JButton newActivity = new JButton("+ Nueva Actividad");
-		newActivity.setBackground(new Color(102, 204, 255));
-		newActivity.setForeground(new Color(0, 0, 153));
-		newActivity.setFont(new Font("Roboto Black", Font.BOLD, 12));
-		newActivity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		newActivity.setBounds(368, 50, 176, 37);
-		contentPane.add(newActivity);
-		
 		JLabel lblNewLabel = new JLabel("Actividades");
 		lblNewLabel.setFont(new Font("Roboto", Font.BOLD, 15));
 		lblNewLabel.setBounds(224, 65, 134, 22);
@@ -180,6 +247,21 @@ public class FrameListadoActividades extends JFrame {
 		}
 		scrollPane.setViewportView(listadoActividades);
 		contentPane.add(scrollPane);
+		
+		JPanel pnlBtnAdd = new JPanel();
+		pnlBtnAdd.setBounds(395, 51, 147, 40);
+		contentPane.add(pnlBtnAdd);
+		pnlBtnAdd.setLayout(null);
+		pnlBtnAdd.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		pnlBtnAdd.setBackground(new Color(135, 206, 250));
+		
+		JLabel lblNuevaActividad = new JLabel("+ Nueva actividad");
+		lblNuevaActividad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNuevaActividad.setForeground(new Color(30, 144, 255));
+		lblNuevaActividad.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNuevaActividad.setBackground(Color.WHITE);
+		lblNuevaActividad.setBounds(0, 0, 147, 40);
+		pnlBtnAdd.add(lblNuevaActividad);
 		
 		
 
