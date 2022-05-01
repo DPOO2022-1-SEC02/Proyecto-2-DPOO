@@ -115,7 +115,7 @@ public class pnlInfoActividades extends JFrame {
 	        win.dispose();
 	        FrameListadoActividades irAReporte = new FrameListadoActividades ();
 	        irAReporte.setVisible(true);
-		}
+			}
 		});
 		lblRegresar.setForeground(new Color(30, 144, 255));
 		lblRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));

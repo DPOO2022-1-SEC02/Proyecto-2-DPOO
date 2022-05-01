@@ -1,29 +1,14 @@
 package vista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
 import javax.swing.border.MatteBorder;
 
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.ScrollPane;
-import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -41,7 +26,7 @@ public class FrameListadoActividades extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {  
 			public void run() {
 				try {
 					FrameListadoActividades frame = new FrameListadoActividades();
@@ -90,26 +75,16 @@ public class FrameListadoActividades extends JFrame {
 		pnlBtnNewUser.setBounds(10, 114, 166, 40);
 		pnlAzul.add(pnlBtnNewUser);
 		pnlBtnNewUser.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO:
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			pnlBtnNewUser.setBackground(new Color(135, 149, 250));
+	    	JComponent comp = (JComponent) e.getSource();
+	        Window win = SwingUtilities.getWindowAncestor(comp);
+	        win.dispose();
+	        FrameAddUser irAReporte = new FrameAddUser ();
+	        irAReporte.setVisible(true);
 			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pnlBtnNewUser.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				pnlBtnNewUser.setBackground(new Color(135, 206, 250));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pnlBtnNewUser.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				pnlBtnNewUser.setBackground(new Color(135, 206, 250));
-			}
+
 		});
 		
 		JLabel lblNewUser = new JLabel("Agregar participante");
@@ -127,25 +102,14 @@ public class FrameListadoActividades extends JFrame {
 		pnlBtnReporteAct.setBounds(10, 216, 166, 40);
 		pnlAzul.add(pnlBtnReporteAct);
 		pnlBtnReporteAct.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO:
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pnlBtnReporteAct.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				pnlBtnReporteAct.setBackground(new Color(135, 206, 250));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pnlBtnReporteAct.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				pnlBtnReporteAct.setBackground(new Color(135, 206, 250));
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			pnlBtnReporteAct.setBackground(new Color(135, 149, 250));
+	    	JComponent comp = (JComponent) e.getSource();
+	        Window win = SwingUtilities.getWindowAncestor(comp);
+	        win.dispose();
+	        FrameReporteActividades irAReporte = new FrameReporteActividades ();
+	        irAReporte.setVisible(true);
 			}
 		});
 		
@@ -163,25 +127,14 @@ public class FrameListadoActividades extends JFrame {
 		pnlBtnRegresar.setBackground(new Color(135, 206, 250));
 		pnlBtnRegresar.setBounds(10, 328, 166, 40);
 		pnlBtnRegresar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO:
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			pnlBtnRegresar.setBackground(new Color(135, 149, 250));
+	    	JComponent comp = (JComponent) e.getSource();
+	        Window win = SwingUtilities.getWindowAncestor(comp);
+	        win.dispose();
+	        FrameProyectInfo irAReporte = new FrameProyectInfo ();
+	        irAReporte.setVisible(true);
 			}
 		});
 		pnlAzul.add(pnlBtnRegresar);
@@ -204,7 +157,7 @@ public class FrameListadoActividades extends JFrame {
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Confirmación", JOptionPane.YES_NO_OPTION)==0) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Estas seguro que quieres salir?", "Confirmaciï¿½n", JOptionPane.YES_NO_OPTION)==0) {
 					FrameListadoActividades.this.dispose();
 				}
 			}

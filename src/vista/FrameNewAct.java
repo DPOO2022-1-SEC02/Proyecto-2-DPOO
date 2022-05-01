@@ -4,17 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -74,7 +77,7 @@ public class FrameNewAct extends JFrame {
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Confirmación", JOptionPane.YES_NO_OPTION)==0) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Estas seguro que quieres salir?", "Confirmaciï¿½n", JOptionPane.YES_NO_OPTION)==0) {
 					FrameNewAct.this.dispose();
 				}
 			}
@@ -106,24 +109,13 @@ public class FrameNewAct extends JFrame {
 		pnlBtnRegresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO:
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
-			}
+				pnlBtnRegresar.setBackground(new Color(135, 149, 250));
+		    	JComponent comp = (JComponent) e.getSource();
+		        Window win = SwingUtilities.getWindowAncestor(comp);
+		        win.dispose();
+		        FrameListadoActividades irAReporte = new FrameListadoActividades();//FrameReporteUser
+		        irAReporte.setVisible(true);
+				}
 		});
 		
 
@@ -138,20 +130,21 @@ public class FrameNewAct extends JFrame {
 		lbRegresar.setBackground(Color.WHITE);
 		lbRegresar.setBounds(0, 0, 132, 44);
 		pnlBtnRegresar.add(lbRegresar);
-		
+
 		JPanel pnlBtnAdd = new JPanel();
 		pnlBtnAdd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (txtNombre.getText().equals("") || txtActividad.getText().equals("") || txtIdActv.getText().equals("") || 
 					txtNombre.getText().equals("Nombre Encargado") || txtActividad.getText().equals("Nombre Actividad") || txtIdActv.getText().equals("ID Actividad")) {
-					lblMessage.setText("¡ Ingresa todos los datos !");
+					lblMessage.setText("ï¿½ Ingresa todos los datos !");
 				}
 				else {
 					// TODO: Agregar Actividad Lo feo
 					
 					lblMessage.setText("");
-					JOptionPane.showMessageDialog(null, "¡ Agrego con exito !");
+					JOptionPane.showMessageDialog(null, "ï¿½ Agrego con exito !");
+
 				}
 				
 				

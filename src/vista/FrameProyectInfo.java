@@ -111,15 +111,15 @@ public class FrameProyectInfo extends JFrame {
 		BtnEditar.setBounds(21, 136, 148, 50);
 		pnlAzul.add(BtnEditar);
 		BtnEditar.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			BtnEditar.setBackground(new Color(135, 149, 250));
-	    	JComponent comp = (JComponent) e.getSource();
-	        Window win = SwingUtilities.getWindowAncestor(comp);
-	        win.dispose();
-	        FrameListadoActividades irAReporte = new FrameListadoActividades();
-	        irAReporte.setVisible(true);
-			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BtnEditar.setBackground(new Color(135, 149, 250));
+		    	JComponent comp = (JComponent) e.getSource();
+		        Window win = SwingUtilities.getWindowAncestor(comp);
+		        win.dispose();
+		        FrameListadoActividades irAReporte = new FrameListadoActividades();
+		        irAReporte.setVisible(true);
+				}
 
 		
 		});
@@ -172,12 +172,7 @@ public class FrameProyectInfo extends JFrame {
 		lblRegresar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			btnReporte.setBackground(new Color(135, 149, 250));
-	    	JComponent comp = (JComponent) e.getSource();
-	        Window win = SwingUtilities.getWindowAncestor(comp);
-	        win.dispose();
-	        FrameListadoProyectos irAReporte = new FrameListadoProyectos();
-	        irAReporte.setVisible(true);
+ 
 		}
 		});
 		lblRegresar.setForeground(new Color(30, 144, 255));

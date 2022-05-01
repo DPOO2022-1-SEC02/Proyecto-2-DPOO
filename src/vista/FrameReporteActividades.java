@@ -10,16 +10,21 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Window;
+
 import javax.swing.border.MatteBorder;
 
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -75,7 +80,7 @@ public class FrameReporteActividades extends JFrame {
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Confirmación", JOptionPane.YES_NO_OPTION)==0) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Estas seguro que quieres salir?", "Confirmaciï¿½n", JOptionPane.YES_NO_OPTION)==0) {
 					FrameReporteActividades.this.dispose();
 				}
 			}
@@ -117,6 +122,18 @@ public class FrameReporteActividades extends JFrame {
 		backBtn.setBorder(new LineBorder(new Color(0, 110, 197),1));
 		backBtn.setBackground(new Color(204, 226, 243));
 		backBtn.setForeground(new Color(0, 110, 197));
+		backBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				backBtn.setBackground(new Color(135, 149, 250));
+		    	JComponent comp = (JComponent) e.getSource();
+		        Window win = SwingUtilities.getWindowAncestor(comp);
+		        win.dispose();
+		        FrameListadoProyectos irAReporte = new FrameListadoProyectos();
+		        irAReporte.setVisible(true);
+				}
+		});
+
 		
 		backBtn.setFont(new Font("Roboto Black", Font.PLAIN, 12));
 		backBtn.setBounds(450, 334, 109, 40);
