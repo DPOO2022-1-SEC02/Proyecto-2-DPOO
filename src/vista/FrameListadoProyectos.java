@@ -16,16 +16,16 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
 
+import modelo.PrManager;
+import modelo.Proyecto;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 import javax.swing.JButton;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.ScrollPane;
 import javax.swing.JScrollBar;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class FrameListadoProyectos extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,26 +50,31 @@ public class FrameListadoProyectos extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FrameListadoProyectos() {
+	public FrameListadoProyectos(PrManager manager) {
+		//Aqui viene la logica
+
+
+		
+		
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(240, 255, 255));
-		contentPane.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(100, 149, 237)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel pnlArriba = new JPanel();
 		pnlArriba.setLayout(null);
 		pnlArriba.setForeground(Color.BLACK);
-		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBorder(new MatteBorder(2, 2, 1, 2, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(227, 245, 244));
 		pnlArriba.setBounds(0, 0, 600, 40);
 		contentPane.add(pnlArriba);
 		
@@ -83,7 +88,7 @@ public class FrameListadoProyectos extends JFrame {
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Confirmación", JOptionPane.YES_NO_OPTION)==0) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Estas seguro que quieres salir?", "Confirmaciï¿½n", JOptionPane.YES_NO_OPTION)==0) {
 					FrameListadoProyectos.this.dispose();
 				}
 			}
@@ -106,25 +111,32 @@ public class FrameListadoProyectos extends JFrame {
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 		lblNewLabel.setBounds(57, 51, 247, 42);
 		contentPane.add(lblNewLabel);
-		
-		
 
-		JPanel listadoProyectos = new JPanel(new GridLayout(50,0));
-		listadoProyectos.setBackground(new Color(153, 255, 255));
+		//TODO cambiar el 1 por manager.sizeOfList() para que no se muera el editor
+		GridLayout layoutProyectos = new GridLayout(1,0);
+		layoutProyectos.setVgap(20);
+		JPanel listadoProyectos = new JPanel(layoutProyectos);
+		listadoProyectos.setBorder(null);
+		listadoProyectos.setBackground(new Color(204, 226, 243,80));
 
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(57, 116, 485, 221);
+		scrollPane.setBorder(null);
 		
 		
 		
-		
-		for (int i =0;i<50;i++) {
-			JLabel texto = new JLabel("Hola que hace");
+		ArrayList<Proyecto> proyectos = manager.getProyectos();
+
+		for (Proyecto proyecto :proyectos) {
+			//textoInteractivo proyDisplay = new textoInteractivo(texto,manager);
+			JLabel texto = new JLabel(proyecto.getName());
 			texto.setFont(new Font("Roboto",Font.PLAIN,18));
 			texto.setForeground(new Color(0, 110, 197));
 			listadoProyectos.add(texto);
+			setActions(texto,manager,proyecto.getId());
 		}
+
 		scrollPane.setViewportView(listadoProyectos);
 		contentPane.add(scrollPane);
 		
@@ -160,7 +172,7 @@ public class FrameListadoProyectos extends JFrame {
 		
 		JLabel lblNuevoProyecto = new JLabel("+ Nuevo proyecto");
 		lblNuevoProyecto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNuevoProyecto.setForeground(new Color(30, 144, 255));
+		lblNuevoProyecto.setForeground(new Color(0, 110, 197));
 		lblNuevoProyecto.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNuevoProyecto.setBackground(Color.WHITE);
 		lblNuevoProyecto.setBounds(0, 0, 141, 44);
@@ -191,6 +203,23 @@ public class FrameListadoProyectos extends JFrame {
 			}
 		
 		});
+		
+		pnlBtnNewProyecto.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 JComponent comp = (JComponent) e.getSource();
+                 Window win = SwingUtilities.getWindowAncestor(comp);
+                 win.dispose();
+				FrameCrearProyecto siguienteVista = null;
+				try {
+					siguienteVista = new FrameCrearProyecto(manager);
+				} catch (Exception ex) {
+					throw new RuntimeException(ex);
+				}
+				siguienteVista.setVisible(true);
+			}
+		});
 		pnlBtnSaveInfo.setLayout(null);
 		pnlBtnSaveInfo.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		pnlBtnSaveInfo.setBackground(new Color(135, 206, 250));
@@ -199,7 +228,7 @@ public class FrameListadoProyectos extends JFrame {
 		
 		JLabel lblGuardarInformacin = new JLabel("Guardar Informaci\u00F3n");
 		lblGuardarInformacin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGuardarInformacin.setForeground(new Color(30, 144, 255));
+		lblGuardarInformacin.setForeground(new Color(0, 110, 197));
 		lblGuardarInformacin.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblGuardarInformacin.setBackground(Color.WHITE);
 		lblGuardarInformacin.setBounds(0, 0, 157, 44);
@@ -210,4 +239,39 @@ public class FrameListadoProyectos extends JFrame {
 		
 		setLocationRelativeTo(null);
 	}
+
+	public void setActions(JLabel textoDisplayed,PrManager manager,int idProy){
+		textoDisplayed.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textoDisplayed.setForeground(new Color(100,50,180));
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				win.dispose();
+				FrameProyectInfo infoDelProyecto = new FrameProyectInfo(manager, idProy);
+				infoDelProyecto.setVisible(true);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+
+			}
+		});
+	}
+
 }

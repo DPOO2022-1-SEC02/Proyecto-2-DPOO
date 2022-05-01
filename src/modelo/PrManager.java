@@ -27,4 +27,14 @@ public class PrManager implements Serializable {
             return proyectos.size() - 1;
         }
 
+    public int sizeOfList(){
+        if (proyectos.isEmpty()){
+            return 1;
+        }
+        return proyectos.size();
+    }
+    public ArrayList<Proyecto> getProyectos(){
+        return proyectos;
+    }
+
 }

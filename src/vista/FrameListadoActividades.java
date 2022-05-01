@@ -1,5 +1,7 @@
 package vista;
 
+import modelo.PrManager;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -25,7 +27,7 @@ public class FrameListadoActividades extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {  
 			public void run() {
 				try {
@@ -36,12 +38,12 @@ public class FrameListadoActividades extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FrameListadoActividades() {
+	public FrameListadoActividades(int idProy,PrManager manager) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -81,7 +83,7 @@ public class FrameListadoActividades extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameAddUser irAReporte = new FrameAddUser ();
+	        FrameAddUser irAReporte = new FrameAddUser (idProy,manager);
 	        irAReporte.setVisible(true);
 			}
 
@@ -108,7 +110,7 @@ public class FrameListadoActividades extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameReporteActividades irAReporte = new FrameReporteActividades ();
+	        FrameReporteActividades irAReporte = new FrameReporteActividades (manager);
 	        irAReporte.setVisible(true);
 			}
 		});
@@ -133,7 +135,7 @@ public class FrameListadoActividades extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameProyectInfo irAReporte = new FrameProyectInfo ();
+	        FrameProyectInfo irAReporte = new FrameProyectInfo (manager,idProy);
 	        irAReporte.setVisible(true);
 			}
 		});

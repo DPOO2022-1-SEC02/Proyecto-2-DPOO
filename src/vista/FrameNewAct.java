@@ -1,5 +1,7 @@
 package vista;
 
+import modelo.PrManager;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -33,7 +35,7 @@ public class FrameNewAct extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,12 +46,12 @@ public class FrameNewAct extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FrameNewAct() {
+	public FrameNewAct(int idProy,PrManager manager) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -113,7 +115,7 @@ public class FrameNewAct extends JFrame {
 		    	JComponent comp = (JComponent) e.getSource();
 		        Window win = SwingUtilities.getWindowAncestor(comp);
 		        win.dispose();
-		        FrameListadoActividades irAReporte = new FrameListadoActividades();//FrameReporteUser
+		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager);//FrameReporteUser
 		        irAReporte.setVisible(true);
 				}
 		});

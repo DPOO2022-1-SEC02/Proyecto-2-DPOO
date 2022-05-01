@@ -9,6 +9,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -21,6 +25,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
+import modelo.PrManager;
+import modelo.Usuario;
 
 public class FrameCrearProyecto extends JFrame {
 
@@ -38,11 +45,11 @@ public class FrameCrearProyecto extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameCrearProyecto frame = new FrameCrearProyecto();
+					FrameCrearProyecto frame = new FrameCrearProyecto(new PrManager());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,12 +61,17 @@ public class FrameCrearProyecto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameCrearProyecto() {
+	public FrameCrearProyecto(PrManager manager) throws Exception {
+		
+		//Aquí hay algo de logica.
+		ArrayList<String> tiposActividades = new ArrayList<>();  
+		
+		//Todo esto es únicamente diseno
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(240, 255, 255));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -67,8 +79,8 @@ public class FrameCrearProyecto extends JFrame {
 		JPanel pnlArriva = new JPanel();
 		pnlArriva.setLayout(null);
 		pnlArriva.setForeground(Color.BLACK);
-		pnlArriva.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriva.setBackground(new Color(102, 204, 204));
+		pnlArriva.setBorder(new MatteBorder(3, 3, 1, 3, (Color) new Color(100, 149, 237)));
+		pnlArriva.setBackground(new Color(227, 245, 244));
 		pnlArriva.setBounds(0, 0, 600, 40);
 		contentPane.add(pnlArriva);
 		
@@ -101,8 +113,8 @@ public class FrameCrearProyecto extends JFrame {
 		pnlArriva.add(lblExit);
 		
 		JPanel pnlAzul = new JPanel();
-		pnlAzul.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlAzul.setBackground(new Color(224, 255, 255));
+		pnlAzul.setBorder(new MatteBorder(3, 3, 3, 1, (Color) new Color(100, 149, 237)));
+		pnlAzul.setBackground(new Color(227, 245, 244));
 		pnlAzul.setForeground(Color.WHITE);
 		pnlAzul.setBounds(0, 0, 186, 400);
 		contentPane.add(pnlAzul);
@@ -130,7 +142,7 @@ public class FrameCrearProyecto extends JFrame {
 		});
 		txtNombreProyecto.setBorder(new LineBorder(new Color(135, 206, 250), 2));
 		txtNombreProyecto.setForeground(new Color(100, 149, 237));
-		txtNombreProyecto.setBackground(new Color(240, 255, 255));
+		txtNombreProyecto.setBackground(Color.WHITE);
 		txtNombreProyecto.setText("Nombre proyecto");
 		txtNombreProyecto.setHorizontalAlignment(SwingConstants.LEFT);
 		txtNombreProyecto.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
@@ -160,7 +172,7 @@ public class FrameCrearProyecto extends JFrame {
 		});
 		txtDescripcion.setBorder(new LineBorder(new Color(135, 206, 250), 2));
 		txtDescripcion.setForeground(new Color(100, 149, 237));
-		txtDescripcion.setBackground(new Color(240, 255, 255));
+		txtDescripcion.setBackground(Color.WHITE);
 		txtDescripcion.setText("Descripcion proyecto");
 		txtDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
 		txtDescripcion.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
@@ -176,7 +188,7 @@ public class FrameCrearProyecto extends JFrame {
 		txtNombreDuenio.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		txtNombreDuenio.setColumns(10);
 		txtNombreDuenio.setBorder(new LineBorder(new Color(135, 206, 250), 2));
-		txtNombreDuenio.setBackground(new Color(240, 255, 255));
+		txtNombreDuenio.setBackground(Color.WHITE);
 		txtNombreDuenio.setBounds(196, 162, 280, 37);
 		contentPane.add(txtNombreDuenio);
 		txtNombreDuenio.addFocusListener(new FocusAdapter() {
@@ -206,7 +218,7 @@ public class FrameCrearProyecto extends JFrame {
 		txtCorreoDuenio.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		txtCorreoDuenio.setColumns(10);
 		txtCorreoDuenio.setBorder(new LineBorder(new Color(135, 206, 250), 2));
-		txtCorreoDuenio.setBackground(new Color(240, 255, 255));
+		txtCorreoDuenio.setBackground(Color.WHITE);
 		txtCorreoDuenio.setBounds(196, 210, 280, 37);
 		contentPane.add(txtCorreoDuenio);
 		txtCorreoDuenio.addFocusListener(new FocusAdapter() {
@@ -237,7 +249,7 @@ public class FrameCrearProyecto extends JFrame {
 		txtFechaFinal.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		txtFechaFinal.setColumns(10);
 		txtFechaFinal.setBorder(new LineBorder(new Color(135, 206, 250), 2));
-		txtFechaFinal.setBackground(new Color(240, 255, 255));
+		txtFechaFinal.setBackground(Color.WHITE);
 		txtFechaFinal.setBounds(196, 258, 280, 37);
 		contentPane.add(txtFechaFinal);
 		txtFechaFinal.addFocusListener(new FocusAdapter() {
@@ -263,7 +275,7 @@ public class FrameCrearProyecto extends JFrame {
 		JPanel btnRegresar = new JPanel();
 		btnRegresar.setLayout(null);
 		btnRegresar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
-		btnRegresar.setBackground(new Color(135, 206, 250));
+		btnRegresar.setBackground(new Color(204, 226, 243));
 		btnRegresar.setBounds(21, 300, 148, 50);
 		pnlAzul.add(btnRegresar);
 		
@@ -275,15 +287,21 @@ public class FrameCrearProyecto extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameListadoProyectos irAReporte = new FrameListadoProyectos();//FrameReporteUser
+	        FrameListadoProyectos irAReporte = new FrameListadoProyectos(manager);//FrameReporteUser
 	        irAReporte.setVisible(true);
 		}
 		});
-		lblRegresar.setForeground(new Color(30, 144, 255));
+		lblRegresar.setForeground(new Color(0, 110, 197));
 		lblRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblRegresar.setBackground(Color.WHITE);
-		lblRegresar.setBounds(10, 11, 128, 28);
+		lblRegresar.setBounds(39, 10, 79, 28);
 		btnRegresar.add(lblRegresar);
+		
+		JLabel lblIngresaTusDatos = new JLabel("<html>Por favor Ingresa la informacion de tu proyecto</html>");
+		lblIngresaTusDatos.setFont(new Font("Roboto Black", Font.BOLD, 19));
+		lblIngresaTusDatos.setBounds(21, 124, 148, 121);
+		lblIngresaTusDatos.setForeground(new Color(0, 110, 197));
+		pnlAzul.add(lblIngresaTusDatos);
 		
 		txtTipo = new JTextField();
 		txtTipo.setText("Tipo Actividad");
@@ -292,7 +310,7 @@ public class FrameCrearProyecto extends JFrame {
 		txtTipo.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		txtTipo.setColumns(10);
 		txtTipo.setBorder(new LineBorder(new Color(135, 206, 250), 2));
-		txtTipo.setBackground(new Color(240, 255, 255));
+		txtTipo.setBackground(Color.WHITE);
 		txtTipo.setBounds(196, 321, 207, 37);
 		contentPane.add(txtTipo);
 		txtTipo.addFocusListener(new FocusAdapter() {
@@ -319,21 +337,58 @@ public class FrameCrearProyecto extends JFrame {
 		btnAgregar.setLayout(null);
 		btnAgregar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnAgregar.setBackground(new Color(135, 206, 250));
-		btnAgregar.setBounds(421, 321, 103, 37);
+		btnAgregar.setBounds(421, 321, 120, 37);
 		contentPane.add(btnAgregar);
 
 		
-		lblAgregar = new JLabel("Agregar");
+		lblAgregar = new JLabel("<html>Agregar tipo de<br>Actividad</html>");
 		lblAgregar.setForeground(new Color(30, 144, 255));
 		lblAgregar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblAgregar.setBackground(Color.WHITE);
-		lblAgregar.setBounds(10, 0, 72, 39);
+		lblAgregar.setBounds(10, 0, 123, 39);
 		btnAgregar.add(lblAgregar);
+		
+		JPanel btnAgregarProy = new JPanel();
+		btnAgregarProy.setLayout(null);
+		btnAgregarProy.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		btnAgregarProy.setBackground(new Color(135, 206, 250));
+		btnAgregarProy.setBounds(256, 368, 250, 22);
+		contentPane.add(btnAgregarProy);
+		
+		JLabel lblAgregarProyecto = new JLabel("Agregar proyecto");
+		lblAgregarProyecto.setForeground(new Color(30, 144, 255));
+		lblAgregarProyecto.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblAgregarProyecto.setBackground(Color.WHITE);
+		lblAgregarProyecto.setBounds(62, 0, 132, 22);
+		btnAgregarProy.add(lblAgregarProyecto);
 		btnAgregar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			tiposActividades.add(txtTipo.getText());
 			txtTipo.setText("");
 		}
 		});//emptyCommit
+		
+		//Logica para cuando se añade el proyecto
+		btnAgregarProy.addMouseListener(new MouseAdapter(){
+			@Override 
+			public void mouseClicked(MouseEvent e) {
+				Usuario duenio = new Usuario(txtNombreDuenio.getText(),txtCorreoDuenio.getText());
+				Date fechaFin=new Date();
+				try {
+					fechaFin = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaFinal.getText());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				manager.crearProyecto(txtNombreProyecto.getText(), txtDescripcion.getText(),duenio,fechaFin);
+				int idProyecto = manager.getId();	
+				manager.getProyecto(idProyecto).setTipos(tiposActividades);
+				tiposActividades.clear();
+
+			}
+		});
+
+		setLocationRelativeTo(null);
+
 	}
 }

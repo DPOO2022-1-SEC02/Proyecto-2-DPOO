@@ -14,7 +14,7 @@ public class Proyecto implements Serializable {
     private HashMap<String, Actividad> actividades;
     private HashMap<String, Usuario> participantesMap;
     private ArrayList<Usuario> participantes;
-    
+
     private Usuario duenio;
     private int id;
 
@@ -35,8 +35,8 @@ public class Proyecto implements Serializable {
     }
 
 
-    public void addTipo(String tipo) {
-        tipos.add(tipo);
+    public void setTipos(ArrayList<String> tipos) {
+        this.tipos = (tipos);
     }
 
     public String getTipos() {
@@ -61,7 +61,7 @@ public class Proyecto implements Serializable {
         }
         return false;
     }
-    
+
     public void addActividad(Actividad actividad) {
         actividades.put(actividad.getTitulo(), actividad);
     }
@@ -103,10 +103,10 @@ public class Proyecto implements Serializable {
     }
 
     public String darInfoProyecto() {
-    	
+
         return ("\nNombre: " + nombre + "\nDescripción: " + descripcion
                 + "\nid: " + id + "\nDueño: " + duenio.getName()
-                + "\nCantidad de actividades: " + actividades.size() 
+                + "\nCantidad de actividades: " + actividades.size()
                 + "\nCantidad de participantes: " + participantes.size() + "\n");
 
     }
@@ -121,13 +121,26 @@ public class Proyecto implements Serializable {
 
     public void addParticipante(Usuario participante) {
         participantes.add(participante);
-        participantesMap.put(participante.getEmail(),participante);
+        participantesMap.put(participante.getEmail(), participante);
     }
+
     public Usuario getParticipante(String mail) {
-    	return participantesMap.get(mail);
+        return participantesMap.get(mail);
     }
+
     public Actividad getActividad(String titulo) {
         return actividades.get(titulo);
     }
-    
+
+    public String getName() {
+        return nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDescripcion(){
+        return descripcion;
+    }
 }

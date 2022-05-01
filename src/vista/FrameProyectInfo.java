@@ -1,5 +1,8 @@
 package vista;
 
+import modelo.PrManager;
+import modelo.Proyecto;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -32,7 +35,7 @@ public class FrameProyectInfo extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,25 +47,27 @@ public class FrameProyectInfo extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
-	public FrameProyectInfo() {
+	public FrameProyectInfo(PrManager manager, int idProy) {
+		//Algo de logica
+		Proyecto prActual = manager.getProyecto(idProy);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(240, 255, 255));
-		contentPane.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(100, 149, 237)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel pnlArriba = new JPanel();
 		pnlArriba.setLayout(null);
 		pnlArriba.setForeground(Color.BLACK);
-		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBorder(new MatteBorder(2, 2, 1, 2, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(227, 245, 244));
 		pnlArriba.setBounds(0, 0, 600, 40);
 		contentPane.add(pnlArriba);
 		
@@ -95,15 +100,15 @@ public class FrameProyectInfo extends JFrame {
 		pnlArriba.add(lblExit);
 		
 		JPanel pnlAzul = new JPanel();
-		pnlAzul.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlAzul.setBackground(new Color(224, 255, 255));
+		pnlAzul.setBorder(new MatteBorder(2, 2, 2, 1, (Color) new Color(100, 149, 237)));
+		pnlAzul.setBackground(new Color(209, 240, 238,40));
 		pnlAzul.setForeground(Color.WHITE);
 		pnlAzul.setBounds(0, 0, 186, 400);
 		contentPane.add(pnlAzul);
 		pnlAzul.setLayout(null);
 	
 		JPanel BtnEditar = new JPanel();
-		BtnEditar.setBounds(21, 136, 148, 50);
+		BtnEditar.setBounds(21, 122, 148, 50);
 		pnlAzul.add(BtnEditar);
 		BtnEditar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -112,7 +117,7 @@ public class FrameProyectInfo extends JFrame {
 		    	JComponent comp = (JComponent) e.getSource();
 		        Window win = SwingUtilities.getWindowAncestor(comp);
 		        win.dispose();
-		        FrameListadoActividades irAReporte = new FrameListadoActividades();
+		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager);
 		        irAReporte.setVisible(true);
 				}
 
@@ -138,7 +143,7 @@ public class FrameProyectInfo extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameListadoProyectos irAReporte = new FrameListadoProyectos();//FrameReporteUser
+	        FrameReporteActividades irAReporte = new FrameReporteActividades(manager);//FrameReporteUser
 	        irAReporte.setVisible(true);
 			}
 		});
@@ -146,7 +151,7 @@ public class FrameProyectInfo extends JFrame {
 		btnReporte.setLayout(null);
 		btnReporte.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnReporte.setBackground(new Color(135, 206, 250));
-		btnReporte.setBounds(21, 213, 148, 50);
+		btnReporte.setBounds(21, 202, 148, 50);
 		pnlAzul.add(btnReporte);
 		
 		JLabel lblGenerarReporte = new JLabel("Generar reporte");
@@ -160,32 +165,37 @@ public class FrameProyectInfo extends JFrame {
 		btnRegresar.setLayout(null);
 		btnRegresar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnRegresar.setBackground(new Color(135, 206, 250));
-		btnRegresar.setBounds(21, 300, 148, 50);
+		btnRegresar.setBounds(21, 277, 148, 50);
 		pnlAzul.add(btnRegresar);
 		
 		JLabel lblRegresar = new JLabel("Regresar");
 		lblRegresar.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
- 
-		}
+			public void mouseClicked(MouseEvent e) {
+				btnReporte.setBackground(new Color(135, 149, 250));
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				win.dispose();
+				FrameListadoProyectos vistaAnterior = new FrameListadoProyectos(manager);//FrameReporteUser
+				vistaAnterior.setVisible(true);
+			}
 		});
 		lblRegresar.setForeground(new Color(30, 144, 255));
 		lblRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblRegresar.setBackground(Color.WHITE);
-		lblRegresar.setBounds(10, 11, 128, 28);
+		lblRegresar.setBounds(10, 10, 128, 28);
 		btnRegresar.add(lblRegresar);
 		
 
 		
-		JLabel lblNombreProyecto = new JLabel("Nombre proyecto (Cambia)");
+		JLabel lblNombreProyecto = new JLabel(prActual.getName());
 		lblNombreProyecto.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNombreProyecto.setForeground(new Color(30, 144, 255));
 		lblNombreProyecto.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		lblNombreProyecto.setBounds(196, 51, 343, 26);
 		contentPane.add(lblNombreProyecto);
-		
-		JLabel lblIdProyecto_1 = new JLabel("IdProyecto (Cambia)");
+
+		JLabel lblIdProyecto_1 = new JLabel(String.valueOf(prActual.getId()));
+		lblIdProyecto_1.setBackground(Color.WHITE);
 		lblIdProyecto_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblIdProyecto_1.setForeground(new Color(30, 144, 255));
 		lblIdProyecto_1.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
@@ -194,17 +204,18 @@ public class FrameProyectInfo extends JFrame {
 		
 		
 		JPanel pnlParticipantes = new JPanel(new GridLayout (50,0));
-		pnlParticipantes.setBackground(new Color(135, 206, 250));
-		pnlParticipantes.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		pnlParticipantes.setBackground(new Color(204, 226, 243,80));
+		pnlParticipantes.setBorder(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
 		scrollPane.setBounds(196, 249, 343, 130);
 		
 		for (int i =0;i<50;i++) {
             JLabel texto = new JLabel("Hola que hace");
             texto.setFont(new Font("Roboto",Font.PLAIN,18));
             texto.setForeground(new Color(0, 110, 197));
-            scrollPane.add(texto);
+            pnlParticipantes.add(texto);
         }
 		scrollPane.setViewportView(pnlParticipantes);
 		contentPane.add(scrollPane);
@@ -218,11 +229,14 @@ public class FrameProyectInfo extends JFrame {
 		
 		txtDescripcion = new JTextField();
 		txtDescripcion.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+		System.out.println(prActual.getDescripcion());
 		txtDescripcion.setText("Descripcion (cambia)");
 		txtDescripcion.setEditable(false);
-		txtDescripcion.setBackground(new Color(135, 206, 250));
+		txtDescripcion.setBackground(new Color(204, 226, 243,80));
 		txtDescripcion.setBounds(196, 125, 343, 92);
 		contentPane.add(txtDescripcion);
 		txtDescripcion.setColumns(10);
+
+		setLocationRelativeTo(null);
 	}
 }
