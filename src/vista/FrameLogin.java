@@ -10,16 +10,21 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Window;
+
 import javax.swing.border.MatteBorder;
 
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -59,19 +64,19 @@ public class FrameLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel pnlArriva = new JPanel();
-		pnlArriva.setLayout(null);
-		pnlArriva.setForeground(Color.BLACK);
-		pnlArriva.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriva.setBackground(new Color(102, 204, 204));
-		pnlArriva.setBounds(0, 0, 600, 40);
-		contentPane.add(pnlArriva);
+		JPanel pnlArriba = new JPanel();
+		pnlArriba.setLayout(null);
+		pnlArriba.setForeground(Color.BLACK);
+		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBounds(0, 0, 600, 40);
+		contentPane.add(pnlArriba);
 		
 		JLabel lblTitle = new JLabel("Project manager");
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(227, 11, 134, 20);
-		pnlArriva.add(lblTitle);
+		pnlArriba.add(lblTitle);
 		
 		JLabel lblExit = new JLabel("X");
 		lblExit.addMouseListener(new MouseAdapter() {
@@ -93,20 +98,24 @@ public class FrameLogin extends JFrame {
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExit.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblExit.setBounds(558, 11, 32, 19);
-		pnlArriva.add(lblExit);
+		pnlArriba.add(lblExit);
 		
 		JPanel pnlBtnLogin = new JPanel();
 		pnlBtnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(txtNombre.getText().equals("sofia") && txtCorreo.getText().equals("sofia")) {
-					//TODO: Hacer que ingrese 
-					lblLoginMessage.setText("");
-					JOptionPane.showMessageDialog(null, "¡ Ingreso con exito !");
-				}
-				else if (txtNombre.getText().equals("") || txtCorreo.getText().equals("") ||
-						txtNombre.getText().equals("Nombre") || txtCorreo.getText().equals("Correo")) {
+				if (txtNombre.getText().equals("") || txtCorreo.getText().equals("") ||
+					txtNombre.getText().equals("Nombre") || txtCorreo.getText().equals("Correo")) {
 					lblLoginMessage.setText("¡ Ingresa todos los datos !");
+				}
+				else {
+					//TODO Guardar nombres y esas vainas feas
+					
+					JComponent comp = (JComponent) e.getSource();
+                    Window win = SwingUtilities.getWindowAncestor(comp);
+                    win.dispose();
+                    FrameListadoProyectos listadoProyectos = new FrameListadoProyectos();
+                    listadoProyectos.setVisible(true);
 				}
 				
 			}

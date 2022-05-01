@@ -22,10 +22,14 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JComboBox;
 
-public class FrameReporteActividades extends JFrame {
+public class FrameReporteUser extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtInfoUsuariocambia;
 
 	/**
 	 * Launch the application.
@@ -34,7 +38,7 @@ public class FrameReporteActividades extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameReporteActividades frame = new FrameReporteActividades();
+					FrameReporteUser frame = new FrameReporteUser();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +50,7 @@ public class FrameReporteActividades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameReporteActividades() {
+	public FrameReporteUser() {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -75,7 +79,7 @@ public class FrameReporteActividades extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Confirmación", JOptionPane.YES_NO_OPTION)==0) {
-					FrameReporteActividades.this.dispose();
+					FrameReporteUser.this.dispose();
 				}
 			}
 			@Override
@@ -104,21 +108,22 @@ public class FrameReporteActividades extends JFrame {
 		txtTitulo.setVerticalAlignment(SwingConstants.BOTTOM);
 		txtTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-		txtTitulo.setBounds(0, 38, 202, 175);
+		txtTitulo.setBounds(0, 38, 202, 40);
 		pnlAzul.add(txtTitulo);
 		
-		JLabel lblActividades = new JLabel("Actividades");
+		JLabel lblActividades = new JLabel("Participantes");
 		lblActividades.setVerticalAlignment(SwingConstants.TOP);
 		lblActividades.setHorizontalAlignment(SwingConstants.CENTER);
 		lblActividades.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-		lblActividades.setBounds(0, 225, 202, 175);
+		lblActividades.setBounds(0, 82, 202, 40);
 		pnlAzul.add(lblActividades);
 		
-		JPanel pnlReporte = new JPanel();
-		pnlReporte.setBackground(Color.WHITE);
-		pnlReporte.setBorder(new LineBorder(new Color(51, 51, 204)));
-		pnlReporte.setBounds(212, 51, 375, 283);
-		contentPane.add(pnlReporte);
+		JComboBox cmboxListaUsers = new JComboBox();
+		cmboxListaUsers.setBackground(new Color(173, 216, 230));
+		cmboxListaUsers.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		cmboxListaUsers.setBounds(10, 135, 182, 22);
+		pnlAzul.add(cmboxListaUsers);
+		// TODO: Agregar usuarios
 		
 		JPanel pnlBtnRegresar = new JPanel();
 		pnlBtnRegresar.setLayout(null);
@@ -157,7 +162,21 @@ public class FrameReporteActividades extends JFrame {
 		lbRegresar.setBounds(0, 0, 132, 44);
 		pnlBtnRegresar.add(lbRegresar);
 		
+		txtInfoUsuariocambia = new JTextField();
+		txtInfoUsuariocambia.setBackground(new Color(255, 255, 255));
+		txtInfoUsuariocambia.setEditable(false);
+		txtInfoUsuariocambia.setText("Info usuario (cambia)");
+		txtInfoUsuariocambia.setBounds(212, 105, 375, 229);
+		contentPane.add(txtInfoUsuariocambia);
+		txtInfoUsuariocambia.setColumns(10);
+		
+		JLabel lblNombre = new JLabel("Nombre (cambia)");
+		lblNombre.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		lblNombre.setBounds(212, 54, 378, 40);
+		contentPane.add(lblNombre);
+		
 		
 		setLocationRelativeTo(null);
 	}
 }
+

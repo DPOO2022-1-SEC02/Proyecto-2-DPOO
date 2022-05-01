@@ -22,10 +22,12 @@ import javax.swing.border.MatteBorder;
 import javax.swing.JList;
 import java.awt.ScrollPane;
 import java.awt.Window;
+import javax.swing.JTextField;
 
 public class FrameProyectInfo extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtDescripcion;
 
 	/**
 	 * Launch the application.
@@ -56,26 +58,19 @@ public class FrameProyectInfo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblDescripcion = new JLabel("Descripcion (Cambia)");
-		lblDescripcion.setForeground(new Color(0, 0, 0));
-		lblDescripcion.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDescripcion.setBounds(196, 118, 343, 100);
-		contentPane.add(lblDescripcion);
-		
-		JPanel pnlArriva = new JPanel();
-		pnlArriva.setLayout(null);
-		pnlArriva.setForeground(Color.BLACK);
-		pnlArriva.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriva.setBackground(new Color(102, 204, 204));
-		pnlArriva.setBounds(0, 0, 600, 40);
-		contentPane.add(pnlArriva);
+		JPanel pnlArriba = new JPanel();
+		pnlArriba.setLayout(null);
+		pnlArriba.setForeground(Color.BLACK);
+		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBounds(0, 0, 600, 40);
+		contentPane.add(pnlArriba);
 		
 		JLabel lblTitle = new JLabel("Project manager");
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(227, 11, 134, 20);
-		pnlArriva.add(lblTitle);
+		pnlArriba.add(lblTitle);
 		
 		JLabel lblExit = new JLabel("X");
 		lblExit.addMouseListener(new MouseAdapter() {
@@ -97,7 +92,7 @@ public class FrameProyectInfo extends JFrame {
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExit.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblExit.setBounds(558, 11, 32, 19);
-		pnlArriva.add(lblExit);
+		pnlArriba.add(lblExit);
 		
 		JPanel pnlAzul = new JPanel();
 		pnlAzul.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
@@ -225,5 +220,14 @@ public class FrameProyectInfo extends JFrame {
 		lblParticipantes_1.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		lblParticipantes_1.setBounds(196, 208, 182, 47);
 		contentPane.add(lblParticipantes_1);
+		
+		txtDescripcion = new JTextField();
+		txtDescripcion.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+		txtDescripcion.setText("Descripcion (cambia)");
+		txtDescripcion.setEditable(false);
+		txtDescripcion.setBackground(new Color(135, 206, 250));
+		txtDescripcion.setBounds(196, 125, 343, 92);
+		contentPane.add(txtDescripcion);
+		txtDescripcion.setColumns(10);
 	}
 }

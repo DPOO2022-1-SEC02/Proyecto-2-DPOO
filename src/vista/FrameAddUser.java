@@ -55,19 +55,19 @@ public class FrameAddUser extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel pnlArriva = new JPanel();
-		pnlArriva.setLayout(null);
-		pnlArriva.setForeground(Color.BLACK);
-		pnlArriva.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriva.setBackground(new Color(102, 204, 204));
-		pnlArriva.setBounds(0, 0, 600, 40);
-		contentPane.add(pnlArriva);
+		JPanel pnlArriba = new JPanel();
+		pnlArriba.setLayout(null);
+		pnlArriba.setForeground(Color.BLACK);
+		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBounds(0, 0, 600, 40);
+		contentPane.add(pnlArriba);
 		
 		JLabel lblTitle = new JLabel("Project manager");
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(227, 11, 134, 20);
-		pnlArriva.add(lblTitle);
+		pnlArriba.add(lblTitle);
 		
 		JLabel lblExit = new JLabel("X");
 		lblExit.addMouseListener(new MouseAdapter() {
@@ -89,7 +89,7 @@ public class FrameAddUser extends JFrame {
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExit.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblExit.setBounds(558, 11, 32, 19);
-		pnlArriva.add(lblExit);
+		pnlArriba.add(lblExit);
 		
 		JPanel pnlBtnAdd = new JPanel();
 		pnlBtnAdd.addMouseListener(new MouseAdapter() {

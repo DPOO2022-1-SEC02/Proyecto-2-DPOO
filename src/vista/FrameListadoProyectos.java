@@ -35,7 +35,6 @@ import java.util.ArrayList;
 public class FrameListadoProyectos extends JFrame {
 
 	private JPanel contentPane;
-	private JLabel lblLoginMessage = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -66,19 +65,19 @@ public class FrameListadoProyectos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel pnlArriva = new JPanel();
-		pnlArriva.setLayout(null);
-		pnlArriva.setForeground(Color.BLACK);
-		pnlArriva.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriva.setBackground(new Color(102, 204, 204));
-		pnlArriva.setBounds(0, 0, 600, 40);
-		contentPane.add(pnlArriva);
+		JPanel pnlArriba = new JPanel();
+		pnlArriba.setLayout(null);
+		pnlArriba.setForeground(Color.BLACK);
+		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBounds(0, 0, 600, 40);
+		contentPane.add(pnlArriba);
 		
 		JLabel lblTitle = new JLabel("Project manager");
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(227, 11, 134, 20);
-		pnlArriva.add(lblTitle);
+		pnlArriba.add(lblTitle);
 		
 		JLabel lblExit = new JLabel("X");
 		lblExit.addMouseListener(new MouseAdapter() {
@@ -100,13 +99,7 @@ public class FrameListadoProyectos extends JFrame {
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExit.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblExit.setBounds(558, 11, 32, 19);
-		pnlArriva.add(lblExit);
-		
-		lblLoginMessage.setForeground(new Color(139, 0, 0));
-		lblLoginMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLoginMessage.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		lblLoginMessage.setBounds(263, 91, 279, 37);
-		contentPane.add(lblLoginMessage);
+		pnlArriba.add(lblExit);
 		
 		JLabel lblNewLabel = new JLabel("Proyectos Disponibles");
 		lblNewLabel.setForeground(new Color(51, 102, 204));

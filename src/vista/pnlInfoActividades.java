@@ -20,10 +20,12 @@ import javax.swing.border.MatteBorder;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 public class pnlInfoActividades extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtDesripcion;
 
 	/**
 	 * Launch the application.
@@ -54,13 +56,13 @@ public class pnlInfoActividades extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JPanel pnlArriva = new JPanel();
-		pnlArriva.setLayout(null);
-		pnlArriva.setForeground(Color.BLACK);
-		pnlArriva.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
-		pnlArriva.setBackground(new Color(102, 204, 204));
-		pnlArriva.setBounds(0, 0, 600, 40);
-		contentPane.add(pnlArriva);
+		JPanel pnlArriba = new JPanel();
+		pnlArriba.setLayout(null);
+		pnlArriba.setForeground(Color.BLACK);
+		pnlArriba.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
+		pnlArriba.setBackground(new Color(102, 204, 204));
+		pnlArriba.setBounds(0, 0, 600, 40);
+		contentPane.add(pnlArriba);
 		
 		JPanel pnlAzul = new JPanel();
 		pnlAzul.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(100, 149, 237)));
@@ -74,7 +76,7 @@ public class pnlInfoActividades extends JFrame {
 		lblTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(227, 11, 134, 20);
-		pnlArriva.add(lblTitle);
+		pnlArriba.add(lblTitle);
 		
 		JLabel lblExit = new JLabel("X");
 		lblExit.addMouseListener(new MouseAdapter() {
@@ -96,7 +98,7 @@ public class pnlInfoActividades extends JFrame {
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExit.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblExit.setBounds(558, 11, 32, 19);
-		pnlArriva.add(lblExit);
+		pnlArriba.add(lblExit);
 		
 		JPanel btnRegresar = new JPanel();
 		btnRegresar.setLayout(null);
@@ -199,13 +201,14 @@ public class pnlInfoActividades extends JFrame {
 		lblEncargado.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		lblEncargado.setBounds(196, 151, 343, 26);
 		contentPane.add(lblEncargado);
-
-		JLabel lblDescripcion = new JLabel("Descripcion (Cambia)");
-		lblDescripcion.setForeground(new Color(0, 0, 0));
-		lblDescripcion.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDescripcion.setBounds(196, 188, 343, 181);
-		contentPane.add(lblDescripcion);
+		
+		txtDesripcion = new JTextField();
+		txtDesripcion.setEditable(false);
+		txtDesripcion.setText("Descripcion (cambia)");
+		txtDesripcion.setBackground(new Color(255, 255, 255));
+		txtDesripcion.setBounds(196, 188, 394, 201);
+		contentPane.add(txtDesripcion);
+		txtDesripcion.setColumns(10);
 	}
 
 }
