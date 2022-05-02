@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -34,6 +36,7 @@ public class FrameNewAct extends JFrame {
 	private JLabel lblMessage = new JLabel("");
 	private JTextField txtActividad;
 	private JTextField txtCorreoEncargado;
+	private String seleccionTipoAct;
 
 	/**
 	 * Launch the application.
@@ -177,7 +180,7 @@ public class FrameNewAct extends JFrame {
 		txtDescripcion.setBorder(new LineBorder(new Color(135, 206, 250), 2));
 		txtDescripcion.setForeground(new Color(100, 149, 237));
 		txtDescripcion.setBackground(new Color(240, 255, 255));
-		txtDescripcion.setText("ID Actividad");
+		txtDescripcion.setText("Descripcion Actividad");
 		txtDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
 		txtDescripcion.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		txtDescripcion.setColumns(10);
@@ -291,11 +294,23 @@ public class FrameNewAct extends JFrame {
 		});
 		
 		JComboBox cmbBoxTipos = new JComboBox();
+		
 		cmbBoxTipos.setBackground(new Color(240,255,255));
 		cmbBoxTipos.setBounds(24, 294, 337, 37);
 		contentPane.add(cmbBoxTipos);
 		
-		
+		for(String tipo: manager.getProyecto(idProy).tipos) {
+			cmbBoxTipos.addItem(tipo);
+		}
+		cmbBoxTipos.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				seleccionTipoAct = cmbBoxTipos.getSelectedItem().toString();
+				
+			}
+			
+		});
 		setLocationRelativeTo(null);
 		
 		//Logica para añadir actividad 
@@ -311,7 +326,7 @@ public class FrameNewAct extends JFrame {
 					int idProyecto = manager.getId();	
 					Usuario user = manager.getProyecto(idProy).getParticipante(txtCorreoEncargado.getText());
 					if (user != null){
-						user.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),cmbBoxTipos.getName(),txtDescripcion.getText());
+						user.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),seleccionTipoAct,txtDescripcion.getText());
 						JOptionPane.showMessageDialog(null, "ï¿½ Agrego con exito !");
 						
 				    	JComponent comp = (JComponent) e.getSource();

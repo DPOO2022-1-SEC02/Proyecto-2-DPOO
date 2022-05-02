@@ -20,7 +20,7 @@ public class Proyecto implements Serializable {
     private Usuario duenio;
     private int id;
 
-    private ArrayList<String> tipos;
+    public ArrayList<String> tipos;
 
     public Proyecto(String nombre, String descripcion, Usuario duenio, int id, Date fechaFinal) {
         this.nombre = nombre;
