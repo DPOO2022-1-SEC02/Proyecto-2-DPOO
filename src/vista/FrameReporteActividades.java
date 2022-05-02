@@ -1,6 +1,7 @@
 package vista;
 
 import modelo.PrManager;
+import modelo.Usuario;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -53,7 +54,7 @@ public class FrameReporteActividades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameReporteActividades(PrManager manager) {
+	public FrameReporteActividades(PrManager manager, Usuario usuarioActual) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -138,7 +139,7 @@ public class FrameReporteActividades extends JFrame {
 		    	JComponent comp = (JComponent) e.getSource();
 		        Window win = SwingUtilities.getWindowAncestor(comp);
 		        win.dispose();
-		        FrameListadoProyectos irAReporte = new FrameListadoProyectos(manager);
+		        FrameListadoProyectos irAReporte = new FrameListadoProyectos(manager, usuarioActual);
 		        irAReporte.setVisible(true);
 				}
 		});

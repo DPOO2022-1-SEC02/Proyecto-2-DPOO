@@ -24,6 +24,7 @@ public class Actividad implements Serializable {
     private HashMap<LocalDate, Integer> trabajoDiario;
     private ArrayList<Date[]> fechas;
     private boolean terminado;
+    private int id;
 
 
     public Actividad(String correo, String titulo,String nombre, String descripcion, String tipoActividad, int id) {
@@ -33,6 +34,7 @@ public class Actividad implements Serializable {
         this.tipoActividad = tipoActividad;
         this.correo = correo;
         fechaInicio = new Date();
+        this.id = id;
         tiempoTrabajo = 0;
         trabajoDiario = new HashMap<>();
         trabajoTotal = 0;
@@ -47,12 +49,18 @@ public class Actividad implements Serializable {
     }
 
 
+    public Date getFecha() {
+    	return fechaInicio;
+    }
     public void initCronometro() {
         starts = Instant.now();
     }
 
     public String getTitulo() {
         return titulo;
+    }
+    public int getId() {
+    	return id;
     }
     public int getTrabTotal() {
     	return trabajoTotal;
@@ -145,6 +153,14 @@ public class Actividad implements Serializable {
         }
         return info;
     }
+    
+    public String getEncargado() {
+    	return nombre;
+    }
+    public String getDescripcion() {
+    	return descripcion;
+    }
 }
+
 
 

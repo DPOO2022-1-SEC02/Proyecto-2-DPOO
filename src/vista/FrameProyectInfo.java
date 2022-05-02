@@ -2,6 +2,7 @@ package vista;
 
 import modelo.PrManager;
 import modelo.Proyecto;
+import modelo.Usuario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -51,7 +52,7 @@ public class FrameProyectInfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameProyectInfo(PrManager manager, int idProy) {
+	public FrameProyectInfo(PrManager manager, int idProy, Usuario usuarioActual) {
 		//Algo de logica
 		Proyecto prActual = manager.getProyecto(idProy);
 		setUndecorated(true);
@@ -117,7 +118,7 @@ public class FrameProyectInfo extends JFrame {
 		    	JComponent comp = (JComponent) e.getSource();
 		        Window win = SwingUtilities.getWindowAncestor(comp);
 		        win.dispose();
-		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager);
+		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager, usuarioActual);
 		        irAReporte.setVisible(true);
 				}
 
@@ -140,11 +141,11 @@ public class FrameProyectInfo extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			btnReporte.setBackground(new Color(135, 149, 250));
-	    	JComponent comp = (JComponent) e.getSource();
+	    	JComponent comp = (JComponent        ) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameReporteActividades irAReporte = new FrameReporteActividades(manager);//FrameReporteUser
-	        irAReporte.setVisible(true);
+	        FrameReporteUser irAReporte = new FrameReporteUser(usuarioActual, manager, idProy);//FrameReporteUser
+	        irAReporte.setVisible(true);   
 			}
 		});
 
@@ -175,7 +176,7 @@ public class FrameProyectInfo extends JFrame {
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
-				FrameListadoProyectos vistaAnterior = new FrameListadoProyectos(manager);//FrameReporteUser
+				FrameListadoProyectos vistaAnterior = new FrameListadoProyectos(manager, usuarioActual);//FrameReporteUser
 				vistaAnterior.setVisible(true);
 			}
 		});
@@ -187,14 +188,13 @@ public class FrameProyectInfo extends JFrame {
 		
 
 		
-		JLabel lblNombreProyecto = new JLabel(prActual.getName());
+		JLabel lblNombreProyecto = new JLabel("Nombre: " + prActual.getName());
 		lblNombreProyecto.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNombreProyecto.setForeground(new Color(30, 144, 255));
 		lblNombreProyecto.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		lblNombreProyecto.setBounds(196, 51, 343, 26);
 		contentPane.add(lblNombreProyecto);
-
-		JLabel lblIdProyecto_1 = new JLabel(String.valueOf(prActual.getId()));
+		JLabel lblIdProyecto_1 = new JLabel("ID: " + String.valueOf(prActual.getId()));
 		lblIdProyecto_1.setBackground(Color.WHITE);
 		lblIdProyecto_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblIdProyecto_1.setForeground(new Color(30, 144, 255));
@@ -211,12 +211,23 @@ public class FrameProyectInfo extends JFrame {
 		scrollPane.setBorder(null);
 		scrollPane.setBounds(196, 249, 343, 130);
 		
-		for (int i =0;i<50;i++) {
-            JLabel texto = new JLabel("Hola que hace");
-            texto.setFont(new Font("Roboto",Font.PLAIN,18));
-            texto.setForeground(new Color(0, 110, 197));
-            pnlParticipantes.add(texto);
-        }
+		
+		for (String correo : prActual.getParticipantes().keySet()) {
+			Usuario participante = prActual.getParticipantes().get(correo);
+			String nombre = participante.getName();
+			String textoMostrar = nombre+" - "+correo;
+			JLabel texto = new JLabel(textoMostrar);
+			texto.setFont(new Font("Roboto",Font.PLAIN,18));
+            texto.setForeground(new Color(100, 100, 100));
+			if (correo.equals(prActual.getDuenio().getEmail())) {
+				texto.setFont(new Font("Roboto",Font.BOLD,18));
+	            texto.setForeground(new Color(0, 110, 197));
+			}
+			
+			
+			pnlParticipantes.add(texto);
+		}
+		
 		scrollPane.setViewportView(pnlParticipantes);
 		contentPane.add(scrollPane);
 		
@@ -229,8 +240,8 @@ public class FrameProyectInfo extends JFrame {
 		
 		txtDescripcion = new JTextField();
 		txtDescripcion.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
-		System.out.println(prActual.getDescripcion());
-		txtDescripcion.setText("Descripcion (cambia)");
+			
+		txtDescripcion.setText(prActual.getDescripcion());
 		txtDescripcion.setEditable(false);
 		txtDescripcion.setBackground(new Color(204, 226, 243,80));
 		txtDescripcion.setBounds(196, 125, 343, 92);

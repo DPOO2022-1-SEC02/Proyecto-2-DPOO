@@ -2,6 +2,7 @@ package modelo;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public class Proyecto implements Serializable {
     private HashMap<String, Actividad> actividades;
     private HashMap<String, Usuario> participantesMap;
     private ArrayList<Usuario> participantes;
+    private HashMap<LocalDate,Integer> trabajoDiario;
 
     private Usuario duenio;
     private int id;
@@ -32,6 +34,7 @@ public class Proyecto implements Serializable {
         participantesMap = new HashMap<>();
         tipos = new ArrayList<>();
         addParticipante(duenio);
+        trabajoDiario = new HashMap<>();
     }
 
 
@@ -52,6 +55,9 @@ public class Proyecto implements Serializable {
     public String getTipo(int pos) {
         return tipos.get(pos - 1);
     }
+    public HashMap<LocalDate,Integer> cantidadesFechas(){
+    	return trabajoDiario;
+    }
 
     public boolean participanteExiste(String mail) {
         for (Usuario participante : participantes) {
@@ -64,6 +70,9 @@ public class Proyecto implements Serializable {
 
     public void addActividad(Actividad actividad) {
         actividades.put(actividad.getTitulo(), actividad);
+        LocalDate fecha = LocalDate.now();
+        int cantidad = trabajoDiario.getOrDefault(fecha,0);
+        trabajoDiario.put(fecha,cantidad++);
     }
 
 
@@ -111,7 +120,13 @@ public class Proyecto implements Serializable {
 
     }
 
+    
+    
+    
     public int getActividadesSize() {
+    	if (actividades.isEmpty()) {
+    		return 1;
+    	}
         return actividades.size();
     }
 
@@ -127,9 +142,17 @@ public class Proyecto implements Serializable {
     public Usuario getParticipante(String mail) {
         return participantesMap.get(mail);
     }
+    
+    public HashMap<String,Usuario> getParticipantes(){
+    	return participantesMap;
+    }
 
     public Actividad getActividad(String titulo) {
         return actividades.get(titulo);
+    }
+
+    public HashMap<String,Actividad> getActividades(){
+        return actividades;
     }
 
     public String getName() {

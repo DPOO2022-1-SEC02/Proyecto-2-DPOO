@@ -1,6 +1,7 @@
 package vista;
 
 import modelo.PrManager;
+import modelo.Usuario;
 
 import java.awt.*;
 
@@ -31,8 +32,10 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class FrameLogin extends JFrame {
 
+public class FrameLogin extends JFrame {
+	
+	private Usuario usuarioActual;
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtCorreo;
@@ -135,11 +138,17 @@ public class FrameLogin extends JFrame {
 				}
 				else {
 					//TODO Guardar nombres y esas vainas feas
-
+					String nombre = txtNombre.getText();
+					String correo = txtCorreo.getText();
+					
+					usuarioActual = new Usuario(nombre, correo);
+					
+					
+					//Siguiente Frame
 					JComponent comp = (JComponent) e.getSource();
                     Window win = SwingUtilities.getWindowAncestor(comp);
                     win.dispose();
-                    FrameListadoProyectos listadoProyectos = new FrameListadoProyectos(manager);
+                    FrameListadoProyectos listadoProyectos = new FrameListadoProyectos(manager, usuarioActual);
                     listadoProyectos.setVisible(true);
 				}
 

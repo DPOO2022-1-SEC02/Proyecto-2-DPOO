@@ -18,6 +18,7 @@ import javax.swing.border.MatteBorder;
 
 import modelo.PrManager;
 import modelo.Proyecto;
+import modelo.Usuario;
 
 import java.awt.event.*;
 import java.io.FileInputStream;
@@ -55,7 +56,7 @@ public class FrameListadoProyectos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameListadoProyectos(PrManager manager) {
+	public FrameListadoProyectos(PrManager manager, Usuario usuarioActual) {
 		//Aqui viene la logica
 
 
@@ -113,7 +114,7 @@ public class FrameListadoProyectos extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		//TODO cambiar el 1 por manager.sizeOfList() para que no se muera el editor
-		GridLayout layoutProyectos = new GridLayout(1,0);
+		GridLayout layoutProyectos = new GridLayout(manager.sizeOfList(),0);
 		layoutProyectos.setVgap(20);
 		JPanel listadoProyectos = new JPanel(layoutProyectos);
 		listadoProyectos.setBorder(null);
@@ -134,7 +135,7 @@ public class FrameListadoProyectos extends JFrame {
 			texto.setFont(new Font("Roboto",Font.PLAIN,18));
 			texto.setForeground(new Color(0, 110, 197));
 			listadoProyectos.add(texto);
-			setActions(texto,manager,proyecto.getId());
+			setActions(texto,manager,proyecto.getId(),usuarioActual);
 		}
 
 		scrollPane.setViewportView(listadoProyectos);
@@ -213,7 +214,7 @@ public class FrameListadoProyectos extends JFrame {
                  win.dispose();
 				FrameCrearProyecto siguienteVista = null;
 				try {
-					siguienteVista = new FrameCrearProyecto(manager);
+					siguienteVista = new FrameCrearProyecto(manager, usuarioActual);
 				} catch (Exception ex) {
 					throw new RuntimeException(ex);
 				}
@@ -240,7 +241,7 @@ public class FrameListadoProyectos extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	public void setActions(JLabel textoDisplayed,PrManager manager,int idProy){
+	public void setActions(JLabel textoDisplayed,PrManager manager,int idProy,Usuario usuarioActual){
 		textoDisplayed.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -248,29 +249,21 @@ public class FrameListadoProyectos extends JFrame {
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
-				FrameProyectInfo infoDelProyecto = new FrameProyectInfo(manager, idProy);
+				FrameProyectInfo infoDelProyecto = new FrameProyectInfo(manager, idProy, usuarioActual);
 				infoDelProyecto.setVisible(true);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
-
-			}
+			public void mousePressed(MouseEvent e) {}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
-
-			}
+			public void mouseEntered(MouseEvent e) {}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
-
-			}
+			public void mouseExited(MouseEvent e) {}
 		});
 	}
 

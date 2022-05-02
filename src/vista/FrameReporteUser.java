@@ -25,6 +25,12 @@ import java.awt.event.FocusEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import modelo.PrManager;
+import modelo.Usuario;
+import modelo.Proyecto;
 
 public class FrameReporteUser extends JFrame {
 
@@ -33,7 +39,7 @@ public class FrameReporteUser extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,11 +52,13 @@ public class FrameReporteUser extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FrameReporteUser() {
+	public FrameReporteUser(Usuario usuarioActual, PrManager manager, int idProy) {
+		Proyecto prActual = manager.getProyecto(idProy);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -78,7 +86,7 @@ public class FrameReporteUser extends JFrame {
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Confirmación", JOptionPane.YES_NO_OPTION)==0) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Estas seguro que quieres salir?", "Confirmaciï¿½n", JOptionPane.YES_NO_OPTION)==0) {
 					FrameReporteUser.this.dispose();
 				}
 			}
@@ -118,12 +126,23 @@ public class FrameReporteUser extends JFrame {
 		lblActividades.setBounds(0, 82, 202, 40);
 		pnlAzul.add(lblActividades);
 		
-		JComboBox cmboxListaUsers = new JComboBox();
+		JComboBox <String> cmboxListaUsers = new JComboBox<String>();
 		cmboxListaUsers.setBackground(new Color(173, 216, 230));
 		cmboxListaUsers.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		cmboxListaUsers.setBounds(10, 135, 182, 22);
 		pnlAzul.add(cmboxListaUsers);
-		// TODO: Agregar usuarios
+		
+		for (String correo : prActual.getParticipantes().keySet()) {
+			cmboxListaUsers.addItem(correo);
+		
+		cmboxListaUsers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String seleccion = cmboxListaUsers.getSelectedItem().toString();
+				Usuario reportado = prActual.getParticipante(seleccion);
+				String reporte = reportado.generarReporte();
+				txtInfoUsuariocambia.setText(reporte);
+			}
+		});
 		
 		JPanel pnlBtnRegresar = new JPanel();
 		pnlBtnRegresar.setLayout(null);
@@ -177,6 +196,7 @@ public class FrameReporteUser extends JFrame {
 		
 		
 		setLocationRelativeTo(null);
+		}
 	}
 }
 

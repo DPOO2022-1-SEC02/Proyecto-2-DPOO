@@ -44,7 +44,7 @@ public class FrameCrearProyecto extends JFrame {
 	
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) throws Exception {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,11 +57,12 @@ public class FrameCrearProyecto extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FrameCrearProyecto(PrManager manager) throws Exception {
+	public FrameCrearProyecto(PrManager manager, Usuario usuarioActual) throws Exception {
 		
 		//Aquí hay algo de logica.
 		ArrayList<String> tiposActividades = new ArrayList<>();  
@@ -287,7 +288,7 @@ public class FrameCrearProyecto extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameListadoProyectos irAReporte = new FrameListadoProyectos(manager);//FrameReporteUser
+	        FrameListadoProyectos irAReporte = new FrameListadoProyectos(manager, usuarioActual);
 	        irAReporte.setVisible(true);
 		}
 		});
@@ -365,8 +366,25 @@ public class FrameCrearProyecto extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			tiposActividades.add(txtTipo.getText());
+			JOptionPane.showMessageDialog(null, "Se añadio el tipo de actividad: " + txtTipo.getText());
 			txtTipo.setText("");
 		}
+		@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAgregar.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAgregar.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btnAgregar.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btnAgregar.setBackground(new Color(135, 206, 250));
+			}
 		});//emptyCommit
 		
 		//Logica para cuando se añade el proyecto
@@ -384,7 +402,24 @@ public class FrameCrearProyecto extends JFrame {
 				int idProyecto = manager.getId();	
 				manager.getProyecto(idProyecto).setTipos(tiposActividades);
 				tiposActividades.clear();
+				JOptionPane.showMessageDialog(null, "Se creo correctamente el proyecto");	
 
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAgregarProy.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAgregarProy.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btnAgregarProy.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btnAgregarProy.setBackground(new Color(135, 206, 250));
 			}
 		});
 

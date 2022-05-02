@@ -1,6 +1,9 @@
 package vista;
 
+import modelo.Usuario;
+import modelo.Actividad;
 import modelo.PrManager;
+import modelo.Proyecto;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -24,7 +27,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
 
-public class pnlInfoActividades extends JFrame {
+public class FrameInfoActividad extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtDesripcion;
@@ -48,7 +51,9 @@ public class pnlInfoActividades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public pnlInfoActividades(int idProy,PrManager manager) {
+	public FrameInfoActividad(int idProy,String nameActividad,PrManager manager, Usuario usuarioActual) {
+		Proyecto prActual = manager.getProyecto(idProy);
+		Actividad actividadActual = prActual.getActividad(nameActividad);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -85,7 +90,7 @@ public class pnlInfoActividades extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "�Estas seguro que quieres salir?", "Confirmaci�n", JOptionPane.YES_NO_OPTION)==0) {
-					pnlInfoActividades.this.dispose();
+					FrameInfoActividad.this.dispose();
 				}
 			}
 			@Override
@@ -117,7 +122,7 @@ public class pnlInfoActividades extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameListadoActividades irAReporte = new FrameListadoActividades (idProy,manager);
+	        FrameListadoActividades irAReporte = new FrameListadoActividades (idProy, manager, usuarioActual);
 	        irAReporte.setVisible(true);
 			}
 		});
@@ -128,6 +133,29 @@ public class pnlInfoActividades extends JFrame {
 		btnRegresar.add(lblRegresar);
 		
 		JPanel btnFinalizar = new JPanel();
+		btnFinalizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnRegresar.setBackground(new Color(153, 204, 255));
+				actividadActual.terminar();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnRegresar.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnRegresar.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btnRegresar.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btnRegresar.setBackground(new Color(135, 206, 250));
+			}
+		});
 		btnFinalizar.setLayout(null);
 		btnFinalizar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnFinalizar.setBackground(new Color(135, 206, 250));
@@ -142,6 +170,12 @@ public class pnlInfoActividades extends JFrame {
 		btnFinalizar.add(lblFinActividad);
 		
 		JPanel btnTerminarTrabajo = new JPanel();
+		btnTerminarTrabajo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actividadActual.stopCronometro();
+			}
+		});
 		btnTerminarTrabajo.setLayout(null);
 		btnTerminarTrabajo.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnTerminarTrabajo.setBackground(new Color(135, 206, 250));
@@ -156,6 +190,29 @@ public class pnlInfoActividades extends JFrame {
 		btnTerminarTrabajo.add(lblTerminarTrabajo);
 		
 		JPanel btnIniciarTrabajo = new JPanel();
+		btnIniciarTrabajo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnIniciarTrabajo.setBackground(new Color(153, 204, 255));
+				actividadActual.initCronometro();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIniciarTrabajo.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIniciarTrabajo.setBackground(new Color(135, 206, 250));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btnIniciarTrabajo.setBackground(new Color(153, 204, 255));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btnIniciarTrabajo.setBackground(new Color(135, 206, 250));
+			}
+		});
 		btnIniciarTrabajo.setLayout(null);
 		btnIniciarTrabajo.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		btnIniciarTrabajo.setBackground(new Color(135, 206, 250));
@@ -183,21 +240,21 @@ public class pnlInfoActividades extends JFrame {
 		lblEditarAct.setBounds(10, 11, 128, 28);
 		btnEditarAct.add(lblEditarAct);
 
-		JLabel lblNombreProyecto = new JLabel("Nombre actividad(Cambia)");
+		JLabel lblNombreProyecto = new JLabel(actividadActual.getTitulo());
 		lblNombreProyecto.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNombreProyecto.setForeground(new Color(30, 144, 255));
 		lblNombreProyecto.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		lblNombreProyecto.setBounds(196, 77, 343, 26);
 		contentPane.add(lblNombreProyecto);
 		
-		JLabel lblIdActividad = new JLabel("ID Actividad (Cambia)");
+		JLabel lblIdActividad = new JLabel(String.valueOf(actividadActual.getId()));
 		lblIdActividad.setHorizontalAlignment(SwingConstants.LEFT);
 		lblIdActividad.setForeground(new Color(30, 144, 255));
 		lblIdActividad.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		lblIdActividad.setBounds(196, 114, 343, 26);
 		contentPane.add(lblIdActividad);
 		
-		JLabel lblEncargado = new JLabel("NombreEncargado(Cambia)");
+		JLabel lblEncargado = new JLabel(actividadActual.getEncargado());
 		lblEncargado.setHorizontalAlignment(SwingConstants.LEFT);
 		lblEncargado.setForeground(new Color(30, 144, 255));
 		lblEncargado.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
@@ -206,7 +263,7 @@ public class pnlInfoActividades extends JFrame {
 		
 		txtDesripcion = new JTextField();
 		txtDesripcion.setEditable(false);
-		txtDesripcion.setText("Descripcion (cambia)");
+		txtDesripcion.setText(actividadActual.getDescripcion());
 		txtDesripcion.setBackground(new Color(255, 255, 255));
 		txtDesripcion.setBounds(196, 188, 394, 201);
 		contentPane.add(txtDesripcion);

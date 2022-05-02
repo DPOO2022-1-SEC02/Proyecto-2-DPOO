@@ -24,11 +24,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.JComboBox;
-
+import modelo.Actividad;
+import modelo.Usuario;
 public class FrameNewAct extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtIdActv;
+	private JTextField txtDescripcion;
 	private JTextField txtNombre;
 	private JLabel lblMessage = new JLabel("");
 	private JTextField txtActividad;
@@ -53,7 +54,7 @@ public class FrameNewAct extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameNewAct(int idProy,PrManager manager) {
+	public FrameNewAct(int idProy,PrManager manager, Usuario usuarioActual) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -117,7 +118,7 @@ public class FrameNewAct extends JFrame {
 		    	JComponent comp = (JComponent) e.getSource();
 		        Window win = SwingUtilities.getWindowAncestor(comp);
 		        win.dispose();
-		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager);//FrameReporteUser
+		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager, usuarioActual);//FrameReporteUser
 		        irAReporte.setVisible(true);
 				}
 		});
@@ -136,41 +137,7 @@ public class FrameNewAct extends JFrame {
 		pnlBtnRegresar.add(lbRegresar);
 
 		JPanel pnlBtnAdd = new JPanel();
-		pnlBtnAdd.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (txtNombre.getText().equals("") || txtActividad.getText().equals("") || txtIdActv.getText().equals("") || 
-					txtNombre.getText().equals("Nombre Encargado") || txtActividad.getText().equals("Nombre Actividad") || txtIdActv.getText().equals("ID Actividad")) {
-					lblMessage.setText("� Ingresa todos los datos !");
-				}
-				else {
-					// TODO: Agregar Actividad Lo feo
-					
-					lblMessage.setText("");
-					JOptionPane.showMessageDialog(null, "� Agrego con exito !");
 
-				}
-				
-				
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pnlBtnAdd.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				pnlBtnAdd.setBackground(new Color(135, 206, 250));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pnlBtnAdd.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				pnlBtnAdd.setBackground(new Color(135, 206, 250));
-			}
-		
-		});
 		pnlBtnAdd.setLayout(null);
 		pnlBtnAdd.setBorder(new LineBorder(new Color(100, 149, 237), 2));
 		pnlBtnAdd.setBackground(new Color(135, 206, 250));
@@ -186,36 +153,36 @@ public class FrameNewAct extends JFrame {
 		lbAdd.setBounds(0, 0, 132, 44);
 		pnlBtnAdd.add(lbAdd);
 		
-		txtIdActv = new JTextField();
-		txtIdActv.addFocusListener(new FocusAdapter() {
+		txtDescripcion = new JTextField();
+		txtDescripcion.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if(txtIdActv.getText().equals("ID Actividad")) {
-					txtIdActv.setText("");
+				if(txtDescripcion.getText().equals("Descripcion Actividad")) {
+					txtDescripcion.setText("");
 				}
 				else {
-					txtIdActv.selectAll();
+					txtDescripcion.selectAll();
 					// TODO
 				}
 			}
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-				if(txtIdActv.getText().equals("")) {
-					txtIdActv.setText("ID Actividad");
+				if(txtDescripcion.getText().equals("")) {
+					txtDescripcion.setText("Descripcion Actividad");
 				}
 				
 			}
 		});
-		txtIdActv.setBorder(new LineBorder(new Color(135, 206, 250), 2));
-		txtIdActv.setForeground(new Color(100, 149, 237));
-		txtIdActv.setBackground(new Color(240, 255, 255));
-		txtIdActv.setText("ID Actividad");
-		txtIdActv.setHorizontalAlignment(SwingConstants.LEFT);
-		txtIdActv.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
-		txtIdActv.setColumns(10);
-		txtIdActv.setBounds(24, 150, 337, 37);
-		contentPane.add(txtIdActv);
+		txtDescripcion.setBorder(new LineBorder(new Color(135, 206, 250), 2));
+		txtDescripcion.setForeground(new Color(100, 149, 237));
+		txtDescripcion.setBackground(new Color(240, 255, 255));
+		txtDescripcion.setText("ID Actividad");
+		txtDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
+		txtDescripcion.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+		txtDescripcion.setColumns(10);
+		txtDescripcion.setBounds(24, 150, 337, 37);
+		contentPane.add(txtDescripcion);
 		
 		txtNombre = new JTextField();
 		txtNombre.addFocusListener(new FocusAdapter() {
@@ -233,6 +200,7 @@ public class FrameNewAct extends JFrame {
 			public void focusLost(FocusEvent e) {
 				if(txtNombre.getText().equals("")) {
 					txtNombre.setText("Nombre Encargado");
+					
 				}
 				
 			}
@@ -329,5 +297,48 @@ public class FrameNewAct extends JFrame {
 		
 		
 		setLocationRelativeTo(null);
+		
+		//Logica para añadir actividad 
+		pnlBtnAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtNombre.getText().equals("") || txtActividad.getText().equals("") || txtDescripcion.getText().equals("") || 
+					txtNombre.getText().equals("Nombre Encargado") || txtActividad.getText().equals("Nombre Actividad") || txtDescripcion.getText().equals("ID Actividad")) {
+					lblMessage.setText("ï¿½ Ingresa todos los datos !");
+				}
+				else {
+					lblMessage.setText("");
+					int idProyecto = manager.getId();	
+					Usuario user = manager.getProyecto(idProy).getParticipante(txtCorreoEncargado.getText());
+					if (user != null){
+						user.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),cmbBoxTipos.getName(),txtDescripcion.getText());
+						JOptionPane.showMessageDialog(null, "ï¿½ Agrego con exito !");
+						
+				    	JComponent comp = (JComponent) e.getSource();
+				        Window win = SwingUtilities.getWindowAncestor(comp);
+				        win.dispose();
+				        FrameNewAct irAReporte = new FrameNewAct(idProy,manager,usuarioActual);
+				        irAReporte.setVisible(true);
+					}
+					else{
+						Usuario newUser = new Usuario(txtNombre.getText(),txtCorreoEncargado.getText());
+						manager.getProyecto(idProy).addParticipante(newUser);
+						newUser.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),cmbBoxTipos.getName(),txtDescripcion.getText());
+						JOptionPane.showMessageDialog(null, "Se agrego el nuevo usuario y se creo la actividad!");	
+						
+				    	JComponent comp = (JComponent) e.getSource();
+				        Window win = SwingUtilities.getWindowAncestor(comp);
+				        win.dispose();
+				        FrameNewAct irAReporte = new FrameNewAct(idProy,manager,usuarioActual);
+				        irAReporte.setVisible(true);				
+					}
+					
+					
+
+				}
+				
+				
+			}		
+		});
 	}
 }

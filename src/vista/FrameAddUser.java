@@ -1,6 +1,7 @@
 package vista;
 
 import modelo.PrManager;
+import modelo.Usuario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -50,7 +51,7 @@ public class FrameAddUser extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameAddUser(int idProy,PrManager manager) {
+	public FrameAddUser(int idProy,PrManager manager, Usuario usuarioActual) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -104,11 +105,21 @@ public class FrameAddUser extends JFrame {
 					txtNombre.getText().equals("Nombre") || txtCorreo.getText().equals("Correo")) {
 					lblLoginMessage.setText("� Ingresa todos los datos !");
 				}
-				else {
-					// TODO: Agregar Participante Lo feo
-					
+				else if(usuarioActual.equals(manager.getProyecto(idProy).getDuenio())){
+					Usuario newUser = new Usuario(txtNombre.getText(),txtCorreo.getText());
+					manager.getProyecto(idProy).addParticipante(newUser);
 					lblLoginMessage.setText("");
 					JOptionPane.showMessageDialog(null, "� Agrego con exito !");
+					
+			    	JComponent comp = (JComponent) e.getSource();
+			        Window win = SwingUtilities.getWindowAncestor(comp);
+			        win.dispose();
+			        FrameAddUser irAReporte = new FrameAddUser(idProy,manager, usuarioActual);
+			        irAReporte.setVisible(true);					
+				}
+				
+				else {
+					JOptionPane.showMessageDialog(null, "No puedes añadir participantes, no eres el dueño");				
 				}
 				
 				
@@ -243,7 +254,7 @@ public class FrameAddUser extends JFrame {
 		    	JComponent comp = (JComponent) e.getSource();
 		        Window win = SwingUtilities.getWindowAncestor(comp);
 		        win.dispose();
-		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager);//FrameReporteUser
+		        FrameListadoActividades irAReporte = new FrameListadoActividades(idProy,manager, usuarioActual);//FrameReporteUser
 		        irAReporte.setVisible(true);
 				}
 		});
