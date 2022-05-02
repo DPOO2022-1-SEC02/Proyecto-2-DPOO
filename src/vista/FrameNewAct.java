@@ -221,7 +221,7 @@ public class FrameNewAct extends JFrame {
 		lblMessage.setForeground(new Color(139, 0, 0));
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessage.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		lblMessage.setBounds(24, 102, 337, 37);
+		lblMessage.setBounds(371, 51, 219, 37);
 		contentPane.add(lblMessage);
 		
 		txtActividad = new JTextField();
@@ -259,7 +259,7 @@ public class FrameNewAct extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 		lblTitulo.setForeground(new Color(51, 102, 204));
-		lblTitulo.setBounds(103, 51, 280, 40);
+		lblTitulo.setBounds(24, 51, 337, 40);
 		contentPane.add(lblTitulo);
 		
 		txtCorreoEncargado = new JTextField();
@@ -319,9 +319,8 @@ public class FrameNewAct extends JFrame {
 		pnlBtnAdd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (txtNombre.getText().equals("") || txtActividad.getText().equals("") || txtDescripcion.getText().equals("") || 
-					txtNombre.getText().equals("Nombre Encargado") || txtActividad.getText().equals("Nombre Actividad") || txtDescripcion.getText().equals("ID Actividad")) {
-					lblMessage.setText("ï¿½ Ingresa todos los datos !");
+				if (txtNombre.getText().equals("") || txtActividad.getText().equals("") || txtDescripcion.getText().equals("")){
+					lblMessage.setText("¡ Ingresa todos los datos !");
 				}
 				else {
 					lblMessage.setText("");

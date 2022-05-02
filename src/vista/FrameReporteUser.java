@@ -10,10 +10,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Window;
+
 import javax.swing.border.MatteBorder;
 
 
@@ -25,6 +28,8 @@ import java.awt.event.FocusEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -132,6 +137,31 @@ public class FrameReporteUser extends JFrame {
 		cmboxListaUsers.setBounds(10, 135, 182, 22);
 		pnlAzul.add(cmboxListaUsers);
 		
+		JPanel btnRegresar = new JPanel();
+		btnRegresar.setLayout(null);
+		btnRegresar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
+		btnRegresar.setBackground(new Color(135, 206, 250));
+		btnRegresar.setBounds(24, 339, 148, 50);
+		pnlAzul.add(btnRegresar);
+		btnRegresar.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnRegresar.setBackground(new Color(135, 149, 250));
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				win.dispose();
+				FrameProyectInfo vistaAnterior = new FrameProyectInfo(manager,idProy, usuarioActual);//FrameReporteUser
+				vistaAnterior.setVisible(true);
+			}
+		});
+		
+		JLabel lblRegresar = new JLabel("Regresar");
+		lblRegresar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegresar.setForeground(new Color(30, 144, 255));
+		lblRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblRegresar.setBackground(Color.WHITE);
+		lblRegresar.setBounds(10, 10, 128, 28);
+		btnRegresar.add(lblRegresar);
+		
 		for (String correo : prActual.getParticipantes().keySet()) {
 			cmboxListaUsers.addItem(correo);
 		
@@ -144,52 +174,16 @@ public class FrameReporteUser extends JFrame {
 			}
 		});
 		
-		JPanel pnlBtnRegresar = new JPanel();
-		pnlBtnRegresar.setLayout(null);
-		pnlBtnRegresar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
-		pnlBtnRegresar.setBackground(new Color(135, 206, 250));
-		pnlBtnRegresar.setBounds(455, 345, 132, 44);
-		contentPane.add(pnlBtnRegresar);
-		pnlBtnRegresar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO:
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(153, 204, 255));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				pnlBtnRegresar.setBackground(new Color(135, 206, 250));
-			}
-		});
-		
-		JLabel lbRegresar = new JLabel("Regresar");
-		lbRegresar.setHorizontalAlignment(SwingConstants.CENTER);
-		lbRegresar.setForeground(new Color(30, 144, 255));
-		lbRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lbRegresar.setBackground(Color.WHITE);
-		lbRegresar.setBounds(0, 0, 132, 44);
-		pnlBtnRegresar.add(lbRegresar);
-		
+				
 		txtInfoUsuariocambia = new JTextField();
 		txtInfoUsuariocambia.setBackground(new Color(255, 255, 255));
 		txtInfoUsuariocambia.setEditable(false);
-		txtInfoUsuariocambia.setText("Info usuario (cambia)");
+		txtInfoUsuariocambia.setText("");
 		txtInfoUsuariocambia.setBounds(212, 105, 375, 229);
 		contentPane.add(txtInfoUsuariocambia);
 		txtInfoUsuariocambia.setColumns(10);
 		
-		JLabel lblNombre = new JLabel("Nombre (cambia)");
+		JLabel lblNombre = new JLabel();
 		lblNombre.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		lblNombre.setBounds(212, 54, 378, 40);
 		contentPane.add(lblNombre);
