@@ -129,6 +129,7 @@ public class FrameProyectInfo extends JFrame {
 		BtnEditar.setLayout(null);
 		
 		JLabel lbLogin = new JLabel("Editar proyecto");
+		lbLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lbLogin.setForeground(new Color(30, 144, 255));
 		lbLogin.setBackground(Color.WHITE);
 		lbLogin.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
@@ -156,6 +157,7 @@ public class FrameProyectInfo extends JFrame {
 		pnlAzul.add(btnReporte);
 		
 		JLabel lblGenerarReporte = new JLabel("Generar reporte");
+		lblGenerarReporte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGenerarReporte.setForeground(new Color(30, 144, 255));
 		lblGenerarReporte.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblGenerarReporte.setBackground(Color.WHITE);
@@ -170,9 +172,10 @@ public class FrameProyectInfo extends JFrame {
 		pnlAzul.add(btnRegresar);
 		
 		JLabel lblRegresar = new JLabel("Regresar");
-		lblRegresar.addMouseListener(new MouseAdapter() {
+		lblRegresar.setHorizontalAlignment(SwingConstants.CENTER);
+		btnRegresar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				btnReporte.setBackground(new Color(135, 149, 250));
+				btnRegresar.setBackground(new Color(135, 149, 250));
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();

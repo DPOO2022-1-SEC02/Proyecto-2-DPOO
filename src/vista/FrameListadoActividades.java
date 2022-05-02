@@ -131,7 +131,7 @@ public class FrameListadoActividades extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameReporteActividades irAReporte = new FrameReporteActividades (manager,usuarioActual);
+	        FrameReporteActividades irAReporte = new FrameReporteActividades (idProy, manager,usuarioActual);
 	        irAReporte.setVisible(true);
 			}
 		});

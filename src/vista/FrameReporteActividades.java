@@ -54,7 +54,7 @@ public class FrameReporteActividades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameReporteActividades(PrManager manager, Usuario usuarioActual) {
+	public FrameReporteActividades(int idProy, PrManager manager, Usuario usuarioActual) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -128,23 +128,7 @@ public class FrameReporteActividades extends JFrame {
 		pnlReporte.setBounds(212, 51, 375, 283);
 		contentPane.add(pnlReporte);
 
-		JButton backBtn = new JButton("Regresar");
-		backBtn.setBorder(new LineBorder(new Color(0, 110, 197),1));
-		backBtn.setBackground(new Color(204, 226, 243));
-		backBtn.setForeground(new Color(0, 110, 197));
-		backBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				backBtn.setBackground(new Color(135, 149, 250));
-		    	JComponent comp = (JComponent) e.getSource();
-		        Window win = SwingUtilities.getWindowAncestor(comp);
-		        win.dispose();
-		        FrameListadoProyectos irAReporte = new FrameListadoProyectos(manager, usuarioActual);
-		        irAReporte.setVisible(true);
-				}
-		});
-
-
+	
 		JPanel pnlBtnRegresar = new JPanel();
 		pnlBtnRegresar.setLayout(null);
 		pnlBtnRegresar.setBorder(new LineBorder(new Color(100, 149, 237), 2));
@@ -154,7 +138,14 @@ public class FrameReporteActividades extends JFrame {
 		pnlBtnRegresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO:
+				pnlBtnRegresar.setBackground(new Color(135, 149, 250));
+		    	JComponent comp = (JComponent) e.getSource();
+		        Window win = SwingUtilities.getWindowAncestor(comp);
+		        win.dispose();
+		        FrameListadoActividades irAReporte = new FrameListadoActividades (idProy, manager,usuarioActual);
+		        irAReporte.setVisible(true);
+				
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
