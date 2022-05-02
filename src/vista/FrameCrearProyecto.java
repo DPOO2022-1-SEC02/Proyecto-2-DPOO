@@ -400,7 +400,7 @@ public class FrameCrearProyecto extends JFrame {
 				}
 				manager.crearProyecto(txtNombreProyecto.getText(), txtDescripcion.getText(),duenio,fechaFin,tiposActividades);				
 				
-				tiposActividades.clear();
+				//tiposActividades.clear();
 				JOptionPane.showMessageDialog(null, "Se creo correctamente el proyecto");	
 
 			}
