@@ -36,6 +36,7 @@ import java.awt.event.ActionEvent;
 import modelo.PrManager;
 import modelo.Usuario;
 import modelo.Proyecto;
+import javax.swing.JTextArea;
 
 public class FrameReporteUser extends JFrame {
 
@@ -162,32 +163,31 @@ public class FrameReporteUser extends JFrame {
 		lblRegresar.setBounds(10, 10, 128, 28);
 		btnRegresar.add(lblRegresar);
 		
-		for (String correo : prActual.getParticipantes().keySet()) {
-			cmboxListaUsers.addItem(correo);
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(208, 116, 382, 273);
+		contentPane.add(textArea);
 		
-		cmboxListaUsers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String seleccion = cmboxListaUsers.getSelectedItem().toString();
-				Usuario reportado = prActual.getParticipante(seleccion);
-				String reporte = reportado.generarReporte();
-				txtInfoUsuariocambia.setText(reporte);
-			}
-		});
 		
 				
-		txtInfoUsuariocambia = new JTextField();
-		txtInfoUsuariocambia.setBackground(new Color(255, 255, 255));
-		txtInfoUsuariocambia.setEditable(false);
-		txtInfoUsuariocambia.setText("");
-		txtInfoUsuariocambia.setBounds(212, 105, 375, 229);
-		contentPane.add(txtInfoUsuariocambia);
-		txtInfoUsuariocambia.setColumns(10);
+		
 		
 		JLabel lblNombre = new JLabel();
 		lblNombre.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		lblNombre.setBounds(212, 54, 378, 40);
 		contentPane.add(lblNombre);
 		
+		for (String correo : prActual.getParticipantes().keySet()) {
+			cmboxListaUsers.addItem(correo);
+			
+			cmboxListaUsers.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String seleccion = cmboxListaUsers.getSelectedItem().toString();
+					Usuario reportado = prActual.getParticipante(seleccion);
+					String reporte = reportado.generarReporte();
+					textArea.setText(reporte);
+					lblNombre.setText("Nombre: " + reportado.getName());
+				}
+			});
 		
 		setLocationRelativeTo(null);
 		}
