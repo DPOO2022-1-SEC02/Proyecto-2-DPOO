@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Actividad implements Serializable {
-    private final String titulo;
-    private final String descripcion;
+    private String titulo;
+    private String descripcion;
     private final String nombre;
     private final String correo;
     private String tipoActividad;
@@ -160,6 +160,16 @@ public class Actividad implements Serializable {
     public String getDescripcion() {
     	return descripcion;
     }
+
+	public void setNombre(String nuevoNombre) {
+		this.titulo = nuevoNombre;
+		
+	}
+
+	public void setDescripcion(String nuevaDescripcion) {
+		this.descripcion = nuevaDescripcion;
+		
+	}
 }
 
 

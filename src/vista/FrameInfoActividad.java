@@ -232,6 +232,7 @@ public class FrameInfoActividad extends JFrame {
 		btnEditarAct.setBackground(new Color(135, 206, 250));
 		btnEditarAct.setBounds(21, 84, 148, 50);
 		pnlAzul.add(btnEditarAct);
+
 		
 		JLabel lblEditarAct = new JLabel("Editar actividad");
 		lblEditarAct.setForeground(new Color(30, 144, 255));
@@ -268,6 +269,21 @@ public class FrameInfoActividad extends JFrame {
 		txtDesripcion.setBounds(196, 188, 394, 201);
 		contentPane.add(txtDesripcion);
 		txtDesripcion.setColumns(10);
+		
+		btnEditarAct.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnEditarAct.setBackground(new Color(135, 149, 250));
+				String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre: ");
+				String nuevaDescripcion = JOptionPane.showInputDialog("Ingrese nueva Actividad: ");
+				actividadActual.setNombre(nuevoNombre);
+				actividadActual.setDescripcion(nuevaDescripcion);
+				JOptionPane.showMessageDialog(null, "Cambios realizados con exito!");
+				lblNombreProyecto.setText(nuevoNombre);
+				txtDesripcion.setText(nuevaDescripcion);
+				
+				
+			}
+		});
 	}
 
 }

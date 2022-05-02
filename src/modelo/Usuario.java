@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 
     public String generarReporte() {
     	System.out.println(actividades);
-        String reporteTxt ="<html>--- Inicio del reporte ---\r\n";
+        String reporteTxt ="--- Inicio del reporte ---\r\n";
         int tiempoTotalTrabajo,tiempo,tiempoTipo;
         HashMap<LocalDate, Integer> tiempoPorDia;
         HashMap<String,Integer> tiempoPorTipo;
@@ -65,7 +65,7 @@ public class Usuario implements Serializable {
     		
     		 
 		}
-    	reporteTxt += "--- Fin del reporte ---</html>";
+    	reporteTxt += "--- Fin del reporte ---";
     	return reporteTxt;
     	
     	
