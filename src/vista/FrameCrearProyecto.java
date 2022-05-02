@@ -295,7 +295,7 @@ public class FrameCrearProyecto extends JFrame {
 		lblRegresar.setForeground(new Color(0, 110, 197));
 		lblRegresar.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblRegresar.setBackground(Color.WHITE);
-		lblRegresar.setBounds(39, 10, 79, 28);
+		lblRegresar.setBounds(0, 0, 148, 50);
 		btnRegresar.add(lblRegresar);
 		
 		JLabel lblIngresaTusDatos = new JLabel("<html>Por favor Ingresa la informacion de tu proyecto</html>");
@@ -391,7 +391,7 @@ public class FrameCrearProyecto extends JFrame {
 		btnAgregarProy.addMouseListener(new MouseAdapter(){
 			@Override 
 			public void mouseClicked(MouseEvent e) {
-				Usuario duenio = new Usuario(txtNombreDuenio.getText(),txtCorreoDuenio.getText());
+				Usuario duenio = new Usuario(txtNombreDuenio.getText(),txtCorreoDuenio.getText(),null);
 				Date fechaFin=new Date();
 				try {
 					fechaFin = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaFinal.getText());

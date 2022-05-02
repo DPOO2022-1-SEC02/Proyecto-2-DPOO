@@ -141,7 +141,7 @@ public class FrameLogin extends JFrame {
 					String nombre = txtNombre.getText();
 					String correo = txtCorreo.getText();
 					
-					usuarioActual = new Usuario(nombre, correo);
+					usuarioActual = new Usuario(nombre, correo,null);
 					
 					
 					//Siguiente Frame

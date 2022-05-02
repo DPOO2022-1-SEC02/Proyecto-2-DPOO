@@ -205,7 +205,7 @@ public class FrameListadoActividades extends JFrame {
 		
 		
 
-		JPanel listadoActividades = new JPanel(new GridLayout(1,0));
+		JPanel listadoActividades = new JPanel(new GridLayout(prActual.getActividadesSize(),0));
 		listadoActividades.setBackground(new Color(204, 226, 243,80));
 
 		
@@ -219,6 +219,7 @@ public class FrameListadoActividades extends JFrame {
 			JLabel texto = new JLabel (titulo);
 			texto.setFont(new Font("Roboto",Font.PLAIN,18));
 			texto.setForeground(new Color(0, 110, 197));
+			setActions(texto, manager, idProy, usuarioActual);
 			listadoActividades.add(texto);
 		}
 

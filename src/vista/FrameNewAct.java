@@ -1,6 +1,7 @@
 package vista;
 
 import modelo.PrManager;
+import modelo.Proyecto;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -327,7 +328,10 @@ public class FrameNewAct extends JFrame {
 					int idProyecto = manager.getId();	
 					Usuario user = manager.getProyecto(idProy).getParticipante(txtCorreoEncargado.getText());
 					if (user != null){
-						user.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),seleccionTipoAct,txtDescripcion.getText());
+						Proyecto prActual = manager.getProyecto(idProy);
+						user.setPrActual(prActual);
+						user.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),cmbBoxTipos.getName(),txtDescripcion.getText());
+						
 						JOptionPane.showMessageDialog(null, "ï¿½ Agrego con exito !");
 						
 				    	JComponent comp = (JComponent) e.getSource();
@@ -337,7 +341,8 @@ public class FrameNewAct extends JFrame {
 				        irAReporte.setVisible(true);
 					}
 					else{
-						Usuario newUser = new Usuario(txtNombre.getText(),txtCorreoEncargado.getText());
+						Proyecto prActual = manager.getProyecto(idProy);
+						Usuario newUser = new Usuario(txtNombre.getText(),txtCorreoEncargado.getText(), prActual);
 						manager.getProyecto(idProy).addParticipante(newUser);
 						newUser.iniciarActividadExt(txtCorreoEncargado.getText(),txtActividad.getText(),cmbBoxTipos.getName(),txtDescripcion.getText());
 						JOptionPane.showMessageDialog(null, "Se agrego el nuevo usuario y se creo la actividad!");	

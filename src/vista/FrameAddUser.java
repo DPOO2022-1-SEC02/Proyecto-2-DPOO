@@ -1,6 +1,7 @@
 package vista;
 
 import modelo.PrManager;
+import modelo.Proyecto;
 import modelo.Usuario;
 
 import java.awt.BorderLayout;
@@ -106,7 +107,8 @@ public class FrameAddUser extends JFrame {
 					lblLoginMessage.setText("� Ingresa todos los datos !");
 				}
 				else if(usuarioActual.equals(manager.getProyecto(idProy).getDuenio())){
-					Usuario newUser = new Usuario(txtNombre.getText(),txtCorreo.getText());
+					Proyecto prActual = manager.getProyecto(idProy);
+					Usuario newUser = new Usuario(txtNombre.getText(),txtCorreo.getText(),prActual);
 					manager.getProyecto(idProy).addParticipante(newUser);
 					lblLoginMessage.setText("");
 					JOptionPane.showMessageDialog(null, "� Agrego con exito !");

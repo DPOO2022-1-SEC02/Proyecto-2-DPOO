@@ -206,7 +206,7 @@ public class FrameProyectInfo extends JFrame {
 		contentPane.add(lblIdProyecto_1);
 		
 		
-		JPanel pnlParticipantes = new JPanel(new GridLayout (50,0));
+		JPanel pnlParticipantes = new JPanel(new GridLayout (prActual.getParticipantes().size(),0));
 		pnlParticipantes.setBackground(new Color(204, 226, 243,80));
 		pnlParticipantes.setBorder(null);
 		

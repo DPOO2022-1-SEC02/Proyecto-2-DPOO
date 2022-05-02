@@ -23,16 +23,17 @@ public class Usuario implements Serializable {
         prActual = proyectoEntrada;
     }
 
-    public Usuario(String nombre, String correo) {
+    public Usuario(String nombre, String correo, Proyecto prActual) {
         this.nombre = nombre;
         this.correo = correo;
+        this.prActual = prActual;
         actividades = new ArrayList<>();
        
     }
 
     public String generarReporte() {
     	System.out.println(actividades);
-        String reporteTxt ="--- Inicio del reporte ---\n";
+        String reporteTxt ="<html>--- Inicio del reporte ---\r\n";
         int tiempoTotalTrabajo,tiempo,tiempoTipo;
         HashMap<LocalDate, Integer> tiempoPorDia;
         HashMap<String,Integer> tiempoPorTipo;
@@ -45,26 +46,26 @@ public class Usuario implements Serializable {
     	tiempoPorTipo = reporte.tiempoTrabajoTipo();
     	numActividades = reporte.cantActividades();
     	
-    	reporteTxt += "Tiempo total trabajado" + " : "+ tiempoTotalTrabajo +"\n";
-    	reporteTxt += "Numero total de actividades trabajadas es: " + numActividades+"\n";
-    	reporteTxt+="Tiempo trabajado diariamente: \n";
+    	reporteTxt += "Tiempo total trabajado" + " : "+ tiempoTotalTrabajo +"\r\n";
+    	reporteTxt += "Numero total de actividades trabajadas es: " + numActividades+"\r\n";
+    	reporteTxt+="Tiempo trabajado diariamente: \r\n";
 
     	
     	for (LocalDate fecha : tiempoPorDia.keySet()) {
 			tiempo = tiempoPorDia.get(fecha);
-			reporteTxt+="\t-"+fecha+": "+tiempo+"\n";
+			reporteTxt+="\t-"+fecha+": "+tiempo+"\r\n";
 		
 			
 		}
     	
-    	reporteTxt += "El tiempo de trabajo por tipo de actividad es: \n";
+    	reporteTxt += "El tiempo de trabajo por tipo de actividad es: v";
     	for (String tipo : tiempoPorTipo.keySet()) {
     		tiempoTipo = tiempoPorTipo.get(tipo);
-    		reporteTxt += "\t-"+ tipo + ": "+ tiempoTipo +"\n";
+    		reporteTxt += "\t-"+ tipo + ": "+ tiempoTipo +"\r\n";
     		
     		 
 		}
-    	reporteTxt += "--- Fin del reporte ---";
+    	reporteTxt += "--- Fin del reporte ---</html>";
     	return reporteTxt;
     	
     	
@@ -78,11 +79,14 @@ public class Usuario implements Serializable {
     }
 
     public void iniciarActividadExt(String correo, String nombreActividad, String tipoActividad, String descripcion) {
-        Actividad actividad = new Actividad(correo, nombreActividad,nombre, descripcion, tipoActividad, prActual.getActividadesSize());
+        Actividad actividad = new Actividad(correo, nombreActividad, nombre, descripcion, tipoActividad, prActual.getActividadesSize());
         prActual.addActividad(actividad);
         actividades.add(actividad);
     }
-
+    public void setPrActual(Proyecto prActual) {
+    	this.prActual = prActual;
+    }
+    
     public String consultarInformacion() {
         return ("Nombre: " + nombre
                 + "\nCorreo: " + correo + "\n");
