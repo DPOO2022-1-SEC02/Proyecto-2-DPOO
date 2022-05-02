@@ -13,8 +13,8 @@ public class PrManager implements Serializable {
     }
 
 
-    public void crearProyecto(String nombre, String descripcion, Usuario duenio, Date fechaFin) {
-        Proyecto retorno = new Proyecto(nombre, descripcion, duenio, proyectos.size(), fechaFin);
+    public void crearProyecto(String nombre, String descripcion, Usuario duenio, Date fechaFin, ArrayList<String> tipos) {
+        Proyecto retorno = new Proyecto(nombre, descripcion, duenio, proyectos.size(), fechaFin, tipos);
         proyectos.add(retorno);
     }
 

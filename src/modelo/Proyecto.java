@@ -20,9 +20,9 @@ public class Proyecto implements Serializable {
     private Usuario duenio;
     private int id;
 
-    public ArrayList<String> tipos;
+    private ArrayList<String> tipos;
 
-    public Proyecto(String nombre, String descripcion, Usuario duenio, int id, Date fechaFinal) {
+    public Proyecto(String nombre, String descripcion, Usuario duenio, int id, Date fechaFinal,ArrayList<String> tipos ) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duenio = duenio;
@@ -32,7 +32,7 @@ public class Proyecto implements Serializable {
         actividades = new HashMap<>();
         participantes = new ArrayList<>();
         participantesMap = new HashMap<>();
-        tipos = new ArrayList<>();
+        this.tipos = tipos;
         addParticipante(duenio);
         trabajoDiario = new HashMap<>();
     }
@@ -51,7 +51,9 @@ public class Proyecto implements Serializable {
         }
         return retorno;
     }
-
+    public ArrayList<String>  getTiposArray(){
+    	return tipos;
+    }
     public String getTipo(int pos) {
         return tipos.get(pos - 1);
     }

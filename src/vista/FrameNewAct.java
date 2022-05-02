@@ -293,14 +293,16 @@ public class FrameNewAct extends JFrame {
 			}
 		});
 		
-		JComboBox cmbBoxTipos = new JComboBox();
+		JComboBox  <String> cmbBoxTipos = new JComboBox <String> ();
 		
 		cmbBoxTipos.setBackground(new Color(240,255,255));
+		cmbBoxTipos.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		cmbBoxTipos.setBounds(24, 294, 337, 37);
 		contentPane.add(cmbBoxTipos);
 		
-		for(String tipo: manager.getProyecto(idProy).tipos) {
+		for(String tipo: manager.getProyecto(idProy).getTiposArray()) {
 			cmbBoxTipos.addItem(tipo);
+			
 		}
 		cmbBoxTipos.addActionListener(new ActionListener(){
 

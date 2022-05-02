@@ -398,9 +398,8 @@ public class FrameCrearProyecto extends JFrame {
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
-				manager.crearProyecto(txtNombreProyecto.getText(), txtDescripcion.getText(),duenio,fechaFin);
-				int idProyecto = manager.getId();	
-				manager.getProyecto(idProyecto).setTipos(tiposActividades);
+				manager.crearProyecto(txtNombreProyecto.getText(), txtDescripcion.getText(),duenio,fechaFin,tiposActividades);				
+				
 				tiposActividades.clear();
 				JOptionPane.showMessageDialog(null, "Se creo correctamente el proyecto");	
 
