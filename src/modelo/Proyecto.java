@@ -15,7 +15,7 @@ public class Proyecto implements Serializable {
     private HashMap<String, Actividad> actividades;
     private HashMap<String, Usuario> participantesMap;
     private ArrayList<Usuario> participantes;
-    private HashMap<LocalDate,Integer> trabajoDiario;
+
 
     private Usuario duenio;
     private int id;
@@ -34,7 +34,7 @@ public class Proyecto implements Serializable {
         participantesMap = new HashMap<>();
         this.tipos = tipos;
         addParticipante(duenio);
-        trabajoDiario = new HashMap<>();
+
     }
 
 
@@ -57,9 +57,7 @@ public class Proyecto implements Serializable {
     public String getTipo(int pos) {
         return tipos.get(pos - 1);
     }
-    public HashMap<LocalDate,Integer> cantidadesFechas(){
-    	return trabajoDiario;
-    }
+
 
     public boolean participanteExiste(String mail) {
         for (Usuario participante : participantes) {
@@ -72,9 +70,7 @@ public class Proyecto implements Serializable {
 
     public void addActividad(Actividad actividad) {
         actividades.put(actividad.getTitulo(), actividad);
-        LocalDate fecha = LocalDate.now();
-        int cantidad = trabajoDiario.getOrDefault(fecha,0);
-        trabajoDiario.put(fecha,cantidad++);
+
     }
 
 

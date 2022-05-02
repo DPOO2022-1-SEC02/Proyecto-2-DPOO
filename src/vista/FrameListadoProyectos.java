@@ -22,7 +22,10 @@ import modelo.Usuario;
 
 import java.awt.event.*;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import java.awt.ScrollPane;
@@ -33,7 +36,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
-public class FrameListadoProyectos extends JFrame {
+public class FrameListadoProyectos extends JFrame implements Serializable{
 
 	private JPanel contentPane;
 
@@ -235,7 +238,37 @@ public class FrameListadoProyectos extends JFrame {
 		lblGuardarInformacin.setBounds(0, 0, 157, 44);
 		pnlBtnSaveInfo.add(lblGuardarInformacin);
 		
-		
+		pnlBtnSaveInfo.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				try {
+				FileOutputStream file = new FileOutputStream("data/guardado.ser");
+				ObjectOutputStream out = new ObjectOutputStream(file);
+				out.writeObject(manager);
+				out.close();
+				file.close();
+				System.out.println("Info guardada.");}
+				catch(Exception ex) {
+					System.out.println("No se ha podido guardar la info.");
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+
+			
+		});
 
 		
 		setLocationRelativeTo(null);

@@ -54,7 +54,7 @@ public class FrameReporteActividades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameReporteActividades(PrManager manager, Usuario usuarioActual) {
+	public FrameReporteActividades(int id, PrManager manager, Usuario usuarioActual) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);

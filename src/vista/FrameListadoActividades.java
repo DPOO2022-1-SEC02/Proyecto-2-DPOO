@@ -131,7 +131,7 @@ public class FrameListadoActividades extends JFrame {
 	    	JComponent comp = (JComponent) e.getSource();
 	        Window win = SwingUtilities.getWindowAncestor(comp);
 	        win.dispose();
-	        FrameReporteActividades irAReporte = new FrameReporteActividades (manager,usuarioActual);
+	        FrameReporteActividades irAReporte = new FrameReporteActividades (idProy, manager,usuarioActual);
 	        irAReporte.setVisible(true);
 			}
 		});
@@ -241,22 +241,7 @@ public class FrameListadoActividades extends JFrame {
 		lblNuevaActividad.setBounds(0, 0, 147, 40);
 		pnlBtnAdd.add(lblNuevaActividad);
 		
-		JPanel pnlreportePorDia = new JPanel();
-		pnlreportePorDia.setBounds(224, 324, 317, 53);
-		contentPane.add(pnlreportePorDia);
-		GridLayout layoutReporte = new GridLayout(2,5);
-
-		Set<LocalDate> clavesEnSet = prActual.cantidadesFechas().keySet();
-		ArrayList<LocalDate> claves = new ArrayList<>(clavesEnSet);
-		for (int i=claves.size()-1;i>claves.size()-6;i--) {
-			if (!claves.isEmpty()) {
-				LocalDate claveActual = claves.get(i);
-				String fechaEnTxt = claveActual.toString();
-				pnlreportePorDia.add(new JLabel(fechaEnTxt));
-			}
-		}
-		pnlreportePorDia.setLayout(layoutReporte);
-
+	
 
 	
 		pnlBtnAdd.addMouseListener(new MouseAdapter() {
